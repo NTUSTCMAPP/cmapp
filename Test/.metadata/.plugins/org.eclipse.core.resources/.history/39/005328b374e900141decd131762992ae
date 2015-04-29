@@ -1,0 +1,29 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class personalUI extends Activity {
+	
+	private String[] selectName=new String[]{"AAAA","BBBB","CCCC","DDDD"};
+	private String[] selectDetail=new String[]{"aaaaaaa","bbbbbbb","ccccccc","ddddddd"};
+	private int[] srcId=new int[]{R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+	private ListView listView;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.personalui);
+		
+		listView=(ListView)findViewById(R.id.personalUI_listview);
+		MyAdapeter adapter=new MyAdpeter(this);
+		//ArrayAdapter<String> adapterSelect= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,select);
+		
+		listView.setAdapter(adapter);
+		//listView.setOnItemClickListener(lvListener);
+		
+	}
+}

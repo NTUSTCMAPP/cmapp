@@ -1,0 +1,40 @@
+package com.cmapp.test;
+
+import android.app.Service;
+import android.content.Intent;
+import android.database.ContentObserver;
+import android.os.IBinder;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Audio.Media;
+import android.util.Log;
+
+public class PhotoListenerService extends Service {
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+		MyContentObserver observer=new MyContentObserver();
+		getContentResolver().registerContentObserver(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, true, observer);
+	}
+	
+	private class MyContentObserver extends ContentObserver {
+
+        public MyContentObserver() {
+            super(null);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            Log.d("Androider", "INSIDE ONcHANGE");
+        }
+
+    }
+}

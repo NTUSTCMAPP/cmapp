@@ -1,0 +1,7 @@
+package com.cmapp.test;
+
+import Android.app.Activity;
+
+public class RadioGroupActivity extends Activity {
+
+}

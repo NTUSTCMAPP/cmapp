@@ -1,0 +1,57 @@
+package com.cmapp.test;
+
+import java.io.InputStream;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import com.cmapp.test.R.id;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+
+public class imgFromUrlActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.imgfromurl);
+		imgDownLoader id =new imgDownLoader();
+		id.execute("http://ord.yahoo.co.jp/o/image/_ylt=A3JuNGyPojlVYW4AT1KU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD/SIG=136unrhps/EXP=1429926927;_ylc=X3IDMgRmc3QDMARpZHgDMARvaWQDQU5kOUdjUzBscDVnOC1nTkJpUU9ZOUZpZG9LOTZXYnRQSWlnaTJBV1ZRdkpaWUdaWWVMLXZzU3FRLVdiVXJBBHADZFc1c2FXdGxJSEJ1WnctLQRwb3MDOARzZWMDc2h3BHNsawNzZnN0/**https%3a//cdn3.iconfinder.com/data/icons/unicons-vector-icons-pack/32/unlike-128.png");
+		
+	}
+	public class imgDownLoader extends AsyncTask<String, Integer, Bitmap> {
+
+		@Override
+		protected Bitmap doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				URL url=new URL(params[0]);
+				HttpsURLConnection httpCon =(HttpsURLConnection) url.openConnection();
+				if(httpCon.getResponseCode()!=200){
+					throw new Exception("Failed to Connect!");
+				}
+				InputStream is =httpCon.getInputStream();
+				return BitmapFactory.decodeStream(is);
+				
+			} catch (Exception e) {
+				Log.e("img","Faild to load Img!");
+				// TODO: handle exception
+			}
+			return null;
+		}
+		
+		protected void onPostExecute(Bitmap img) {
+			ImageView iv =(ImageView)findViewById(R.id.urlImg);
+			if(iv!=null && img!=null){
+				iv.setImageBitmap(img);
+			}
+		}
+
+	}
+}

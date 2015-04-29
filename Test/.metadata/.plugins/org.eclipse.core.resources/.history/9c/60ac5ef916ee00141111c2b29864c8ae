@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+	<Button android:id="@+id/btCamera"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Camera"
+	    
+	    />
+	<Button android:id="@+id/btGallery"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+		android:layout_below="@id/btCamera"
+	    android:text="Gallery"
+	    
+	    />
+	<ImageView 
+	    android:id="@+id/imgCamera"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+		android:src="@drawable/ic_launcher"	
+		android:layout_alignParentTop="true"
+		android:scaleType="fitXY"
+		android:adjustViewBounds="true"
+		/>
+	<TextView
+	    android:id="@+id/cameraRoot"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:text="Root"
+	    android:layout_centerHorizontal="true"
+	    ></TextView>
+</RelativeLayout>

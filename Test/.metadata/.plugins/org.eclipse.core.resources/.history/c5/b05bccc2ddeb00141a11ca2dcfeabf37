@@ -1,0 +1,49 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class fragmentReplaceActivity extends Activity {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.fragmentreplace);
+		Button btName=(Button)findViewById(R.id.btFragmentName);
+		Button btNickName=(Button)findViewById(R.id.btFragmentNickName);
+		btName.setOnClickListener(btListener);
+		btNickName.setOnClickListener(btListener);
+		
+	}
+
+	private Button.OnClickListener btListener =new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			FragmentManager fm=getFragmentManager();
+			FragmentTransaction ft =fm.beginTransaction();
+			nicknameFragment nickf=new nicknameFragment();
+			nameFragment nf=new nameFragment();
+			
+			
+			if(v.getId()==R.id.btFragmentName){
+				//ft.replace(R.id.fragment_name2, nf);
+			}
+			if(v.getId()==R.id.btFragmentNickName){
+				//ft.remove(nf);
+				
+				ft.replace(R.id.fragment_name2, nickf);
+				
+			}
+			ft.commit();
+		}
+		
+		
+	};
+}

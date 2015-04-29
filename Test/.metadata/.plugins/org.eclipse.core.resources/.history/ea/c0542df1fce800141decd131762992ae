@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+<RadioGroup
+    android:id="@+id/radiogroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RadioButton
+        android:id="@+id/rd1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A"
+        >
+    <RadioButton
+        android:id="@+id/rd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="B"
+        >
+    <RadioButton
+        android:id="@+id/rd3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="C"
+        >
+    </RadioButton>
+        
+    
+</RadioGroup>
+</RelativeLayout>

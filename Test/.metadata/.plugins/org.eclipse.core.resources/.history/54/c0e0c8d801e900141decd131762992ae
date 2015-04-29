@@ -1,0 +1,21 @@
+package com.cmapp.test;
+
+import java.security.KeyStore.PrivateKeyEntry;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class listViewActivity extends Activity {
+	private String[] select=new String[]{"A","B","C","D"};
+	private Spinner spinner;
+	Private TextView spText;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.listview);
+		
+	}
+}

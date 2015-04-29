@@ -1,0 +1,98 @@
+package com.cmapp.test;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+
+
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+
+public class imgFromUrlActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.imgfromurl);
+		imgDownLoader id =new imgDownLoader(this);
+		id.execute("http://wanderingoak.net/bridge.png");
+		Intent i = new Intent(imgFromUrlActivity.this,imgURLintentServiceActivity.class);
+		i.putExtra("url","http://wanderingoak.net/bridge.png");
+		//startService(i);
+	}
+	public class imgDownLoader extends AsyncTask<String, Integer, Bitmap> {
+		private ProgressDialog progressDialog_;
+		private Activity uiActivity_;
+		 public imgDownLoader(Activity activity) {
+		        super();
+		        uiActivity_ = activity;
+		        
+		    }
+		protected void onPreExecute() {
+			progressDialog_ = new ProgressDialog(uiActivity_);
+	        progressDialog_.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+	        progressDialog_.setIndeterminate(false);
+	        progressDialog_.show();
+		}
+		@Override
+		protected Bitmap doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				URL url=new URL(params[0]);
+				HttpURLConnection httpCon =(HttpURLConnection) url.openConnection();
+				httpCon.connect();
+				if(httpCon.getResponseCode()!=200){
+					throw new Exception("Failed to Connect!");
+				}
+				InputStream is =httpCon.getInputStream();
+				
+				Bitmap outBitmap = BitmapFactory.decodeStream(is);   
+				 
+			        int width_  = outBitmap.getWidth();
+			        int height_ = outBitmap.getHeight();
+			        int totalPixcel = width_ * height_;
+			        progressDialog_.setMax(totalPixcel);
+			 
+			        int i,j;
+			        for(j = 0; j < height_; j++) {
+			            for(i = 0; i < width_; i++) {
+			                int pixelColor = outBitmap.getPixel(i, j);
+			               outBitmap.setPixel(i, j, Color.argb(60, Color.red(pixelColor), Color.green(pixelColor), Color.blue(pixelColor)));
+			            }
+			            //publishProgressメソッドを呼ぶことで
+			            //onProgressUpdateメソッドが呼ばれ、進捗状況がUIスレッドで表示されます。
+			            publishProgress(i+j);
+			        }
+				return outBitmap;
+				
+			} catch (Exception e) {
+				Log.e("img","Faild to load Img!");
+				// TODO: handle exception
+			}
+			return null;
+		}
+		 @Override
+		    protected void onProgressUpdate(Integer... progress) {
+		        progressDialog_.incrementProgressBy(progress[0]);
+		    }
+		
+		protected void onPostExecute(Bitmap img) {
+			ImageView iv =(ImageView)findViewById(R.id.urlImg);
+			if(iv!=null && img!=null){
+				iv.setImageBitmap(img);
+			}
+			 progressDialog_.dismiss();
+		}
+
+	}
+}

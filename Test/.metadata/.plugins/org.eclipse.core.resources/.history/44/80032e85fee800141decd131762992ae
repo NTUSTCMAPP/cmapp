@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+	<CheckBox 
+	    android:id="@+id/chk1"
+	    android:text="A"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    />
+	<CheckBox 
+	    android:id="@+id/chk2"
+	    android:text="B"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/chk1"
+	    />
+	<CheckBox 
+	    android:id="@+id/chk3"
+	    android:text="C"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/chk2"
+	    
+	    />
+	<CheckBox 
+	    android:id="@+id/chk4"
+	    android:text="D"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/chk3"
+	    />
+	<TextView
+		android:id="@+id/chkText"
+		android:text="你勾選的是："
+		android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/chk4"
+	>   
+	</TextView>
+</RelativeLayout>

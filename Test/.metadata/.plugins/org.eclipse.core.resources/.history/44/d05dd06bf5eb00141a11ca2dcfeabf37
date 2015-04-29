@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <SlidingDrawer 
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:content="@+id/sliderContent"
+        android:handle="@+id/sliderHandle"
+        
+        >
+        <LinearLayout 
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            >
+            
+        <Button
+            android:id="@+id/sliderHandle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Menu"
+            ></Button>
+        <TextView
+            android:id="@+id/sliderTitle"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            android:text="Tilte"
+            ></TextView>
+        </LinearLayout>
+       <ListView
+	    android:id="@+id/sliderContent"
+	    android:layout_width="100dp"
+	    android:layout_height="wrap_content"
+	   
+	    />
+    </SlidingDrawer>
+		 <TextView
+            android:id="@+id/sliderDetail"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            android:text="Detail"
+            ></TextView>
+</FrameLayout>

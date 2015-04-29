@@ -1,0 +1,14 @@
+package com.cmapp.test;
+
+import android.app.IntentService;
+import android.content.Intent;
+
+public class imgURLintentServiceActivity extends IntentService {
+
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

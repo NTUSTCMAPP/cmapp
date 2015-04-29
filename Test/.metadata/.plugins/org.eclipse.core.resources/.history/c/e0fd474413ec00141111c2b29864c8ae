@@ -1,0 +1,101 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.DragEvent;
+import android.view.View;
+import android.view.View.DragShadowBuilder;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class dragAndDropActivity extends Activity {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.dragdrop);
+		TextView tvDrag =(TextView)findViewById(R.id.tvDargDrop);
+		tvDrag.setOnLongClickListener(tvLongClick);
+		tvDrag.setOnDragListener(tvDragListener);
+	}
+	
+	private TextView.OnLongClickListener tvLongClick =new  TextView.OnLongClickListener(){
+
+		@Override
+		public boolean onLongClick(View v) {
+			// TODO Auto-generated method stub
+			
+			//TextView dragTextView =(TextView)findViewById(1);
+			v.startDrag(null, new DragShadowBuilder(v), null, 0);
+			return true;
+		}
+		
+		
+		
+	};
+	private TextView.OnDragListener tvDragListener=new TextView.OnDragListener(){
+
+		@Override
+		public boolean onDrag(View v, DragEvent dragevent) {
+			// TODO Auto-generated method stub
+			  RelativeLayout thisLayout =(RelativeLayout)findViewById(R.id.dragdropview);
+				TextView textView=new TextView(getApplicationContext());
+				RelativeLayout.LayoutParams textLayoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
+				RelativeLayout.LayoutParams layoutParams =new RelativeLayout.LayoutParams(textLayoutParams.width,textLayoutParams.height);
+				
+
+			//RelativeLayout.LayoutParams layoutParams=(RelativeLayout.LayoutParams)v.getLayoutParams();
+			int xDrag,yDrag;
+			
+			TextView dragText =(TextView)v;
+			switch (dragevent.getAction()) {
+			case DragEvent.ACTION_DRAG_STARTED:
+				// layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+				 Log.d("myLog","start");
+				break;
+			case DragEvent.ACTION_DRAG_ENTERED:
+				xDrag= (int) dragevent.getX();
+				yDrag= (int) dragevent.getY(); 
+				break;
+			case DragEvent.ACTION_DRAG_EXITED:
+				xDrag= (int) dragevent.getX();
+				yDrag= (int) dragevent.getY(); 
+				layoutParams.leftMargin = xDrag;
+	            layoutParams.topMargin = yDrag;
+	        //    dragText.setLayoutParams(layoutParams);
+	            
+	            textView.setLayoutParams(layoutParams);
+				//layoutParams.setMargins(textLayoutParams.leftMargin,textLayoutParams.topMargin, 0, 0);
+				textView.setText(((TextView)v).getText().toString());
+				textView.setTextSize(((TextView)v).getTextSize());
+				textView.setId(1);
+				textView.setTextColor(Color.BLACK);
+				thisLayout.addView(textView);
+	            Log.d("myLog", xDrag +" "+ yDrag);
+				break;
+			case DragEvent.ACTION_DRAG_LOCATION:
+				xDrag= (int) dragevent.getX();
+				yDrag= (int) dragevent.getY(); 
+				
+				break;
+			case DragEvent.ACTION_DRAG_ENDED:
+				
+				break;
+			case DragEvent.ACTION_DROP:
+				
+	           // dragText.setLayoutParams(layoutParams);
+				break;
+
+			default:
+				break;
+			}
+			return true;
+		}
+		
+		
+	};
+	
+}

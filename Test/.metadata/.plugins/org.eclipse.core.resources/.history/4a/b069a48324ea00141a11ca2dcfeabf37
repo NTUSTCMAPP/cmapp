@@ -1,0 +1,7 @@
+package com.cmapp.test;
+
+import android.os.AsyncTask;
+
+public class imgDownLoader extends AsyncTask<Params, Progress, Result> {
+
+}

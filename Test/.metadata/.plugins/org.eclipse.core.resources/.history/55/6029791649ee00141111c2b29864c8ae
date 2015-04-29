@@ -1,0 +1,7 @@
+package com.ntust.cmapp;
+
+import android.app.Fragment;
+
+public class GetPhoto_Activity extends Fragment {
+
+}

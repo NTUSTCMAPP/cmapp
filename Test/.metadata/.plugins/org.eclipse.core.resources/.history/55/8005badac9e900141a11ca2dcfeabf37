@@ -1,0 +1,62 @@
+package com.cmapp.test;
+
+
+import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class popObject extends Activity {
+	private int marginY=30;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.popobject);
+		
+		Button btPop =(Button)findViewById(R.id.btPop);
+		btPop.setOnClickListener(btListener);
+		
+		
+		
+		
+	}
+	private Button.OnClickListener btListener = new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			buildLayout();
+		}
+		
+		
+	};
+	
+	public void buildLayout(){
+		FrameLayout topView=new FrameLayout(getApplicationContext());
+		FrameLayout.LayoutParams topLayoutParams=new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,300);
+		MarginLayoutParams mlp =(MarginLayoutParams)topLayoutParams;
+		mlp.setMargins(50, marginY, 0, 0);
+
+		topView.setLayoutParams(mlp);
+		TextView textView=new TextView(getApplicationContext());
+		RelativeLayout.LayoutParams textLayoutParams =new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,300);
+		textView.setLayoutParams(textLayoutParams);
+		//textLayoutParams.setMargins(0, 100, 0, 0);
+		textView.setText("POP!!!");
+		textView.setTextSize(60);
+		textView.setTextColor(Color.RED);
+		topView.addView(textView);
+		marginY+=120;
+		addContentView(topView, mlp); 
+		
+		
+	}
+}

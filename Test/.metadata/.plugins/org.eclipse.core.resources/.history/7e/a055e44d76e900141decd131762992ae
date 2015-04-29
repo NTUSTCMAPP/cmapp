@@ -1,0 +1,66 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class personalUI extends Activity {
+	
+	private String[] selectName=new String[]{"AAAA","BBBB","CCCC","DDDD"};
+	private String[] selectDetail=new String[]{"aaaaaaa","bbbbbbb","ccccccc","ddddddd"};
+	private int[] srcId=new int[]{R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+	private ListView listView;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.personalui);
+		
+		listView=(ListView)findViewById(R.id.personalUI_listview);
+		MyAdapeter adapter=new MyAdapeter(this);
+		//ArrayAdapter<String> adapterSelect= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,select);
+		
+		listView.setAdapter(adapter);
+		//listView.setOnItemClickListener(lvListener);
+		
+	}
+	
+	public class MyAdapeter extends BaseAdapter{
+		private LayoutInflater myInflater;
+		public MyAdapeter(Context c){
+			myInflater =LayoutInflater.from(c);
+		}
+		@Override
+		public Object getItem(int position){
+			return selectName[position];
+		}
+		
+		@Override
+		public long getItemId(int position){
+			return position;
+		}
+		public View getView(int position,View converView,ViewGroup parent){
+			converView =myInflater.inflate(R.layout.personallistview, null);
+			ImageView imgLogo =(ImageView)findViewById(R.id.imgLogo);
+			TextView txtName=((TextView)converView.findViewById(R.id.txtName));
+			TextView txtDetail=((TextView)converView.findViewById(R.id.txtDetail));
+			imgLogo.setImageResource(srcId[position]);
+			txtName.setText(selectName[position]);
+			txtDetail.setText(selectDetail[position]);
+			
+			return converView;
+		}
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return selectName.length;
+		}
+	}
+}

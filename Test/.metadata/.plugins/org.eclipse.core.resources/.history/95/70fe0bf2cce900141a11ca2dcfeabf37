@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#000000"   
+    android:id="@+id/popLayout" 
+    android:layout_marginLeft="100dp">
+    
+	<Button
+	    android:id="@+id/btPop"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="POP!"
+	    android:textColor="#ffffff"
+	    ></Button>
+	<Button
+	    android:id="@+id/btSlide"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/btPop"
+	    android:text="Slide"
+	    android:textColor="#ffffff"
+	    ></Button>
+
+	
+</RelativeLayout>

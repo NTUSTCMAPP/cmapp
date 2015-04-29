@@ -1,0 +1,38 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class veriableExchangeToActivity extends Activity {
+	EditText tvString,tvinteger;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.veriableexchangeto);
+		tvString=(EditText)findViewById(R.id.edVeriableString);
+		tvinteger=(EditText)findViewById(R.id.edVeriableInteger);
+		Button btBack=(Button)findViewById(R.id.btVeriableBack);
+		Intent intent=this.getIntent();
+		Bundle bundle =intent.getExtras();
+		
+		tvString.setText(tvString.getText().toString()+bundle.getString("Name"));
+		tvinteger.setText(tvinteger.getText().toString()+bundle.getInt("Number"));
+		
+		btBack.setOnClickListener(btListener);
+	}
+	
+	private Button.OnClickListener btListener =new Button.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			finish();
+		}
+		
+	};
+}

@@ -1,0 +1,17 @@
+package com.cmapp.test;
+
+import com.cmapp.test.R.id;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class imgFromUrlActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.imgfromurl);
+		imgDownLoader id =new imgDownLoader();
+		
+	}
+}

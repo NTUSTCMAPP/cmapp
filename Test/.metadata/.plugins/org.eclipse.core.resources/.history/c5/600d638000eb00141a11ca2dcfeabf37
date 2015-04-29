@@ -1,0 +1,26 @@
+package com.cmapp.test;
+
+import android.R.anim;
+import android.app.ListFragment;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
+
+public class nameFragment extends ListFragment  implements OnItemClickListener{
+	public void onActivityCreated(Bundle savedInstanceState){
+		super.onActivityCreated(savedInstanceState);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, People.NAME);
+		this.setListAdapter(adapter);
+		getListView().setOnClickListener(this);
+	
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
+		
+	}
+}

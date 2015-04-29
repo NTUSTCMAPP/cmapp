@@ -1,0 +1,206 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.cmapp.test.MainActivity" >
+    
+	<TextView
+	    android:id="@+id/Title"
+	    android:text="@string/Title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:textSize="20sp"
+	    android:textColor="#FF0000">
+	</TextView>
+
+	<LinearLayout 
+	    android:id="@+id/LL1"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:orientation="horizontal"
+	    android:layout_below="@+id/Title"
+	    android:weightSum="2">
+	    
+	<Button android:id="@+id/editText"
+	    android:layout_height="50dp"
+	    android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:text="EditText"
+	    />
+	<Button android:id="@+id/Alert"
+	    android:layout_height="50dp"
+	    android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:layout_below="@+id/Title"
+	    android:layout_toRightOf="@+id/editText"
+	    android:text="Alert"
+	    />
+	</LinearLayout>
+	<LinearLayout 
+	     android:id="@+id/LL2"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:orientation="horizontal"
+	    android:layout_below="@+id/LL1"
+	    android:weightSum="2">
+	    
+	<Button android:id="@+id/CheckBox"
+	    android:layout_height="50dp"
+	    android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:text="CheckBox"
+	    />
+	<Button android:id="@+id/RadioGroup"
+	    android:layout_height="50dp"
+	    android:layout_width="0dp"
+	    android:layout_weight="1"
+	   
+	    android:layout_toRightOf="@+id/editText"
+	    android:text="RadioGroup"
+	    />
+	</LinearLayout>
+
+	<LinearLayout
+	    android:id="@+id/LL4"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/LL3"
+	    android:layout_margin="0dp"
+	    android:orientation="horizontal"
+	    android:padding="0dp"
+	    android:weightSum="2" >
+	    
+	<Button
+	    android:id="@+id/ListViewMulti"
+	    android:layout_width="0dp"
+	    android:layout_height="50dp"
+	    android:layout_margin="0dp"
+	    android:layout_weight="1"
+	    android:minHeight="48dp"
+	    android:text="ListViewMulti" />
+
+	<Button
+	    android:id="@+id/VeriableExchange"
+	    android:layout_width="0dp"
+	    android:layout_height="50dp"
+	    android:layout_margin="0dp"
+	    android:layout_toRightOf="@+id/ListViewMulti"
+	    android:layout_weight="1"
+	    android:text="VeriableExchange" />
+
+	</LinearLayout>
+	<LinearLayout 
+	     android:id="@+id/LL5"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:orientation="horizontal"
+	    android:layout_below="@+id/LL4"
+	    android:weightSum="2">
+	    
+	<Button android:id="@+id/personalUI"
+	    android:layout_height="50dp"
+	    android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:text="personalUI"
+	    />
+	<Button android:id="@+id/pop"
+	    android:layout_height="50dp"
+	    android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:layout_toRightOf="@+id/personalUI"
+	    android:text="Pop"
+	    />
+	</LinearLayout>
+
+	<LinearLayout
+	    android:id="@+id/LL3"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/LL2"
+	    android:layout_margin="0dp"
+	    android:layout_marginBottom="0dp"
+	    android:layout_marginStart="0dp"
+	    android:layout_marginTop="0dp"
+	    android:orientation="horizontal"
+	    android:weightSum="2" >
+
+	    <Button
+	        android:id="@+id/Spinner"
+	        android:layout_width="0dp"
+	        android:layout_height="50dp"
+	        android:layout_weight="1"
+	        android:text="Spinner" />
+
+	    <Button
+	        android:id="@+id/ListView"
+	        android:layout_width="0dp"
+	        android:layout_height="50dp"
+	        android:layout_toRightOf="@+id/Spinner"
+	        android:layout_weight="1"
+	        android:text="ListView" />
+	</LinearLayout>
+	<LinearLayout
+	    android:id="@+id/LL6"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/LL5"
+	    android:layout_margin="0dp"
+	    android:layout_marginBottom="0dp"
+	    android:layout_marginStart="0dp"
+	    android:layout_marginTop="0dp"
+	    android:orientation="horizontal"
+	    android:weightSum="2" >
+
+	    <Button
+	        android:id="@+id/imgFormUrl"
+	        android:layout_width="0dp"
+	        android:layout_height="50dp"
+	        android:layout_weight="1"
+	        android:text="imgFormUrl" />
+
+	    <Button
+	        android:id="@+id/Camera"
+	        android:layout_width="0dp"
+	        android:layout_height="50dp"
+	        android:layout_toRightOf="@+id/imgFormUrl"
+	        android:layout_weight="1"
+	        android:text="Camera" />
+	</LinearLayout>
+	<LinearLayout
+	    android:id="@+id/LL7"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/LL6"
+	    android:layout_margin="0dp"
+	    android:layout_marginBottom="0dp"
+	    android:layout_marginStart="0dp"
+	    android:layout_marginTop="0dp"
+	    android:orientation="horizontal"
+	    android:weightSum="2" >
+
+	    <Button
+	        android:id="@+id/fragment"
+	        android:layout_width="0dp"
+	        android:layout_height="50dp"
+	        android:layout_weight="1"
+	        android:text="Fragment" />
+
+	    <Button
+	        android:id="@+id/None"
+	        android:layout_width="0dp"
+	        android:layout_height="50dp"
+	        android:layout_toRightOf="@+id/fragment"
+	        android:layout_weight="1"
+	        android:text="None" />
+	</LinearLayout>
+
+</RelativeLayout>

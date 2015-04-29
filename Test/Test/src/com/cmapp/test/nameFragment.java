@@ -1,0 +1,31 @@
+package com.cmapp.test;
+
+import android.app.ListFragment;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
+
+public class nameFragment extends ListFragment  implements OnItemClickListener{
+	public void onActivityCreated(Bundle savedInstanceState){
+		super.onActivityCreated(savedInstanceState);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, People.NAME);
+		this.setListAdapter(adapter);
+		getListView().setOnItemClickListener(this);
+	
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
+		TextView ageText=(TextView)getActivity().findViewById(R.id.ageText);
+		TextView marrageText=(TextView)getActivity().findViewById(R.id.marrageText);
+		TextView educationText=(TextView)getActivity().findViewById(R.id.educationText);
+		ageText.setText(People.AGE[position]);
+		marrageText.setText(People.MARRAGE[position]);
+		educationText.setText(People.EDUCATION[position]);
+	}
+}

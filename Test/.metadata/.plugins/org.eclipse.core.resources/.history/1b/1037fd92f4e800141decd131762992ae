@@ -1,0 +1,28 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.CheckBox;
+
+public class checkBoxActivity extends Activity {
+	private CheckBox[] chk=new CheckBox[4];
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.checkbox);
+		chk[0]=(CheckBox)findViewById(R.id.chk1);
+		chk[1]=(CheckBox)findViewById(R.id.chk2);
+		chk[2]=(CheckBox)findViewById(R.id.chk3);
+		chk[3]=(CheckBox)findViewById(R.id.chk4);
+		for(int i=0;i<4;i++){
+			chk[i].setOnCheckedChangeListener(checkListenter);
+		}
+	}
+	
+	public CheckBox.OnCheckedChangeListener checkListener= new CheckBox.OnCheckedChangeListener(){
+		
+		
+	};
+	
+}

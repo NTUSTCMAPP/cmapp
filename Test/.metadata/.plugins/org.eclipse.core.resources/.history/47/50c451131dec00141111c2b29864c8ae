@@ -1,0 +1,34 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class touchActivity extends Activity {
+	TextView view;
+	ViewGroup root;
+	private int xPadding;
+	private int yPadding;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.touchView);
+		
+		 root = (ViewGroup)findViewById(R.id.root);
+
+		    _view = new TextView(this);
+		    _view.setText("TextView!!!!!!!!");
+
+		    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 50);
+		    layoutParams.leftMargin = 50;
+		    layoutParams.topMargin = 50;
+		    layoutParams.bottomMargin = -250;
+		    layoutParams.rightMargin = -250;
+		    _view.setLayoutParams(layoutParams);
+
+		    _view.setOnTouchListener(this);
+		    _root.addView(_view);
+	}
+}

@@ -1,0 +1,21 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class listViewMultiActivity extends Activity {
+	private String[] select=new String[]{"A","B","C","D"};
+	private ListView listView;
+	private TextView lvText;
+	private Button btListView;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.listviewmulti);
+		
+	}
+}

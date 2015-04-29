@@ -1,0 +1,44 @@
+package com.cmapp.test;
+
+import java.security.KeyStore.PrivateKeyEntry;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class listViewActivity extends Activity {
+	private String[] select=new String[]{"A","B","C","D"};
+	private ListView listView;
+	private TextView lvText;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.listview);
+		listView=(ListView)findViewById(R.id.btListView);
+		lvText=(TextView)findViewById(R.id.listViewText);
+		
+		ArrayAdapter<String> adapterSelect= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,select);
+		
+		//adapterSelect.setDropDownViewResource(android.R.layout.simple_spinner_item);
+		listView.setAdapter(adapterSelect);
+		listView.setOnItemClickListener(lvListener);
+	}
+	
+	private ListView.OnItemClickListener lvListener =new ListView.OnItemClickListener(){
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			lvText.setText(parent.getItemAtPosition(position).toString());
+		}
+
+		
+	};
+}

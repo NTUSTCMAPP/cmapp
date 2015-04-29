@@ -1,0 +1,16 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class fragmentReplaceActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.fragmentreplace);
+		Button btName=(Button)findViewById(R.id.btFragmentName);
+		Button btNickName=(Button)findViewById(R.id.btFragmentNickName);
+	}
+
+}

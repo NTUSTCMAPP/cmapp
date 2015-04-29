@@ -1,0 +1,18 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+
+public class PhotoServerActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.photoservice);
+		
+		Button btStart =(Button) findViewById(R.id.btPhotoServiceStart);
+		Button btStop =(Button) findViewById(R.id.btPhotoServiceStop);
+		
+	}
+}

@@ -1,0 +1,140 @@
+package com.cmapp.test;
+
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.DragEvent;
+import android.view.View;
+import android.view.View.DragShadowBuilder;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class dragAndDropActivity extends Activity {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.dragdrop);
+		TextView tvDrag =(TextView)findViewById(R.id.tvDargDrop);
+		tvDrag.setOnLongClickListener(tvLongClick);
+		//tvDrag.setOnDragListener(tvDragListener);
+	}
+	
+	private TextView.OnLongClickListener tvLongClick =new  TextView.OnLongClickListener(){
+
+		@Override
+		public boolean onLongClick(View v) {
+			// TODO Auto-generated method stub
+			
+			//TextView dragTextView =(TextView)findViewById(1);
+			RelativeLayout.LayoutParams textLayoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
+			RelativeLayout.LayoutParams layoutParams =new RelativeLayout.LayoutParams(textLayoutParams.width,textLayoutParams.height);
+			
+			RelativeLayout thisLayout =(RelativeLayout)findViewById(R.id.dragdropview);
+			TextView textView;
+			
+			v.startDrag(null, new DragShadowBuilder(v), v, 0);
+			textView.setText(((TextView)v).getText().toString());
+			textView.setTextSize(((TextView)v).getTextSize());
+			textView.setId(1);
+			textView.setTextColor(Color.BLACK);
+			thisLayout.addView(textView);
+			textView.setOnDragListener(tvDragListener);
+			textView.setOnLongClickListener(dragLongClick);
+			return true;
+		}
+		
+		
+		
+	};
+	private TextView.OnLongClickListener dragLongClick =new  TextView.OnLongClickListener(){
+
+		@Override
+		public boolean onLongClick(View v) {
+			// TODO Auto-generated method stub
+			
+			//TextView dragTextView =(TextView)findViewById(1);
+
+			v.startDrag(null, new DragShadowBuilder(v), v, 0);
+			
+			return true;
+		}
+		
+		
+		
+	};
+	private TextView.OnDragListener tvDragListener=new TextView.OnDragListener(){
+
+		@Override
+		public boolean onDrag(View v, DragEvent dragevent) {
+			// TODO Auto-generated method stub
+				
+			RelativeLayout.LayoutParams layoutParams=(RelativeLayout.LayoutParams)v.getLayoutParams();
+			int xDrag,yDrag;
+			
+			
+			switch (dragevent.getAction()) {
+			case DragEvent.ACTION_DRAG_STARTED:
+				 layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+				 Log.d("myLog","start");
+				break;
+			case DragEvent.ACTION_DRAG_ENTERED:
+				xDrag= (int) dragevent.getX();
+				yDrag= (int) dragevent.getY(); 
+				Log.d("myLog", "Eneter"+xDrag +" "+ yDrag);
+				 layoutParams.leftMargin = xDrag;
+		            layoutParams.topMargin = yDrag;
+					
+					v.setLayoutParams(layoutParams);
+				break;
+			case DragEvent.ACTION_DRAG_EXITED:
+				xDrag= (int) dragevent.getX();
+				yDrag= (int) dragevent.getY(); 
+				Log.d("myLog", "Exit"+xDrag +" "+ yDrag);
+	            
+	            layoutParams.leftMargin = xDrag;
+	            layoutParams.topMargin = yDrag;
+				
+				v.setLayoutParams(layoutParams);
+				break;
+			case DragEvent.ACTION_DRAG_LOCATION:
+				xDrag= (int) dragevent.getX();
+				yDrag= (int) dragevent.getY(); 
+				Log.d("myLog", "Location"+xDrag +" "+ yDrag);
+				
+				break;
+			case DragEvent.ACTION_DRAG_ENDED:
+				TextView localstate =(TextView)dragevent.getLocalState();
+				xDrag= (int) localstate.getX();
+				yDrag= (int) localstate.getY(); 
+				
+				Log.d("myLog", "End"+xDrag +" "+ yDrag);
+				break;
+			case DragEvent.ACTION_DROP:
+				  /*View view = (View) dragevent.getLocalState();
+		          ViewGroup owner = (ViewGroup) view.getParent();
+		          owner.removeView(view);
+		          RelativeLayout container = (RelativeLayout) v;
+		          container.addView(view);
+		          view.setVisibility(View.VISIBLE);*/
+				//Log.d("myLog", "Drop"+xDrag +" "+ yDrag);
+				
+				
+	           // dragText.setLayoutParams(layoutParams);
+				break;
+
+			default:
+				break;
+			}
+			return true;
+		}
+		
+		
+	};
+	
+}
