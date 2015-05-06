@@ -10,7 +10,7 @@
 		$DB="cmapp";
 		//$con=mssql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
 		$link =mysql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
-		echo "Sucesses!!";
+		//echo "Sucesses!!";
 		$sql="SELECT * FROM USER";
 		$result=execute_sql($DB,$sql,$link);
 		echo "Num:";
