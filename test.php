@@ -8,10 +8,10 @@
 	<?php
 
 		$DB="cmapp";
-		//$con=mssql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
-		$link =mysql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
+		$con=mssql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
+		//$link =mysql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
 		echo "Sucesses!!";
-		$sql="SELECT * FROM USER";
+		/*$sql="SELECT * FROM USER";
 		echo "Num:";
 		$result=execute_sql($DB,$sql,$link);
 		echo mysql_num_rows($result);
@@ -21,7 +21,7 @@
 
 		}
 		mysql_free_result($result);
-		mysql_close($link);
+		mysql_close($link);*/
 	?>
 
 
