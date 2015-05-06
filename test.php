@@ -8,7 +8,7 @@
 	<?php
 
 		$DB="cmapp";
-		$con=mssql_connect("cmapp.nado.tw","mobileUser","ntustmobile") or die("Wrong!");
+		$con=mssql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
 		//$link =mysql_connect
 		echo "Sucesses!!";
 		/*$sql="SELECT * FROM USER";
