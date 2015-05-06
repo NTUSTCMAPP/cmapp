@@ -6,9 +6,23 @@
 </head>
 <body>
 	<?php
-		$link =mysql_connect("localhost","mobileUser","ntustmobile") or die("Wrong!");
+
+		$DB="cmapp";
+		$con=mssql_connect("cmapp.nado.tw","mobileUser","ntustmobile") or die("Wrong!");
+		//$link =mysql_connect
 		echo "Sucesses!!";
+		/*$sql="SELECT * FROM USER";
+		$result=execute_sql($DB,$sql,$link);
+
+		while($row =mysql_fetch_array($result,MYSQL_BOTH)){
+			echo $row["UserId"]."<br>";
+			echo $row["UserNAme"]."<br>";
+
+		}
+		mysql_free_result($result);*/
+		mysql_close($link);
 	?>
+
 
 </body>
 </html>
