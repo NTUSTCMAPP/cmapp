@@ -13,7 +13,7 @@
 		echo "Sucesses!!";
 		$sql="SELECT * FROM USER";
 		$result=execute_sql($DB,$sql,$link);
-
+		echo mysql_num_rows($result);
 		while($row =mysql_fetch_array($result,MYSQL_BOTH)){
 			echo $row["UserId"]."<br>";
 			echo $row["UserNAme"]."<br>";
