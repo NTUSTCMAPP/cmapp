@@ -10,14 +10,17 @@ echo $_FILES['image']['name'] . '<br/>';
 if(is_dir("./photo/")){
 	$target_path = "./photo/";
 
-	$target_path = $target_path . strstr($_FILES['image']['name']);
+//	$target_path = $target_path . strstr($_FILES['image']['name']);
+	$target_path = $target_path . "test.jpg";
 
 
 	try {
 	    //throw exception if can't move the file
-	    chmod($target_path, 0777);
+	    
 	    if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
 	        throw new Exception('Could not move file');
+	    }else{
+	    	chmod($target_path, 0777);
 	    }
 
 	    echo "The file " . basename($_FILES['image']['name']) .
