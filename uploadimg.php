@@ -25,6 +25,8 @@ if(!is_dir("./photo/")){
 	} catch (Exception $e) {
 	    die('File did not upload: ' . $e->getMessage());
 	}
+}else{
+	echo "dir isn't exist";
 }
 
 
