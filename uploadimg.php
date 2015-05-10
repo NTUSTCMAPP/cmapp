@@ -9,12 +9,13 @@ echo $_FILES['image']['name'] . '<br/>';
 //ini_set('max_execution_time', 300);
 
 
-$target_path = "/photo";
+$target_path = "/var/www/html/cmapp/photo/";
 
-//$target_path = $target_path . basename($_FILES['image']['name']);
+$target_path = $target_path . basename($_FILES['image']['name']);
 
 try {
     //throw exception if can't move the file
+    chmod($target_path, 0777);
     if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
         throw new Exception('Could not move file');
     }
@@ -25,3 +26,4 @@ try {
     die('File did not upload: ' . $e->getMessage());
 }
 ?>
+
