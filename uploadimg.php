@@ -9,7 +9,7 @@ echo $_FILES['image']['name'] . '<br/>';
 //ini_set('max_execution_time', 300);
 
 
-$target_path = "photo/";
+$target_path = "./photo/";
 
 $target_path = $target_path . basename($_FILES['image']['name']);
 
