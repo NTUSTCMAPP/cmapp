@@ -10,8 +10,8 @@ echo $_FILES['image']['name'] . '<br/>';
 if(is_dir("./photo/")){
 	$target_path = "./photo/";
 
-//	$target_path = $target_path . strstr($_FILES['image']['name']);
-	$target_path = $target_path . "test.jpg";
+	$target_path = $target_path . basename($_FILES['image']['name']);
+	//$target_path = $target_path . "test.jpg";
 
 
 	try {
