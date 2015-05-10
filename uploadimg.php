@@ -11,7 +11,7 @@ echo $_FILES['image']['name'] . '<br/>';
 
 $target_path = "./photo/";
 
-$target_path = $target_path . basename($_FILES['image']['name']);
+//$target_path = $target_path . basename($_FILES['image']['name']);
 
 try {
     //throw exception if can't move the file
