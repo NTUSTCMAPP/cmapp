@@ -7,23 +7,26 @@ echo $_FILES['image']['name'] . '<br/>';
 //ini_set('post_max_size', '10M');
 //ini_set('max_input_time', 300);
 //ini_set('max_execution_time', 300);
+if(!is_dir("./photo/")){
+	$target_path = "./photo/";
+
+	$target_path = $target_path . strstr($_FILES['image']['name']);
 
 
-$target_path = "photo/";
+	try {
+	    //throw exception if can't move the file
+	    chmod($target_path, 0777);
+	    if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
+	        throw new Exception('Could not move file');
+	    }
 
-$target_path = $target_path . basename($_FILES['image']['name']);
-
-try {
-    //throw exception if can't move the file
-    chmod($target_path, 0777);
-    if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
-        throw new Exception('Could not move file');
-    }
-
-    echo "The file " . basename($_FILES['image']['name']) .
-    " has been uploaded";
-} catch (Exception $e) {
-    die('File did not upload: ' . $e->getMessage());
+	    echo "The file " . basename($_FILES['image']['name']) .
+	    " has been uploaded";
+	} catch (Exception $e) {
+	    die('File did not upload: ' . $e->getMessage());
+	}
 }
+
+
 ?>
 
