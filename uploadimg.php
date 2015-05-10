@@ -7,8 +7,8 @@ echo $_FILES['image']['name'] . '<br/>';
 //ini_set('post_max_size', '10M');
 //ini_set('max_input_time', 300);
 //ini_set('max_execution_time', 300);
-if(!is_dir("/var/www/html/cmapp/photo/")){
-	$target_path = "/var/www/html/cmapp/photo/";
+if(is_dir("./photo/")){
+	$target_path = "./photo/";
 
 	$target_path = $target_path . strstr($_FILES['image']['name']);
 
