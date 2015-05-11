@@ -37,13 +37,13 @@ public class EditProductActivity extends Activity {
 	JSONParser jsonParser = new JSONParser();
 
 	// single product url
-	private static final String url_product_detials = "http://www.tui-na.com.tw/android_connect/get_product_details.php";
+	private static final String url_product_detials = "http://cmapp.nado.tw/AndroidConnectingToPhpMySQL/android_connect/get_product_details.php";
 
 	// url to update product
-	private static final String url_update_product = "http://www.tui-na.com.tw/android_connect/update_product.php";
+	private static final String url_update_product = "http://cmapp.nado.tw/AndroidConnectingToPhpMySQL/android_connect/update_product.php";
 	
 	// url to delete product
-	private static final String url_delete_product = "http://www.tui-na.com.tw/android_connect/delete_product.php";
+	private static final String url_delete_product = "http://cmapp.nado.tw/AndroidConnectingToPhpMySQL/android_connect/delete_product.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
