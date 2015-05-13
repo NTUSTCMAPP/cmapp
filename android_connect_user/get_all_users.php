@@ -21,7 +21,7 @@ $result = mysql_query("SELECT *FROM User") or die(mysql_error());//從ＵＳＥ�
 if (mysql_num_rows($result) > 0) {
     // looping through all results
     // products node
-    $response["UserID"] = array();
+    $response["Users"] = array();
     
     while ($row = mysql_fetch_array($result)) {
         // temp user array
@@ -35,7 +35,7 @@ if (mysql_num_rows($result) > 0) {
 
 
         // push single product into final response array
-        array_push($response["users"], $User);
+        array_push($response["Users"], $User);
     }
     // success
     $response["success"] = 1;
