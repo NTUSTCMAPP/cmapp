@@ -35,7 +35,7 @@ if (mysql_num_rows($result) > 0) {
 
 
         // push single product into final response array
-        array_push($response["products"], $User);
+        array_push($response["users"], $User);
     }
     // success
     $response["success"] = 1;
