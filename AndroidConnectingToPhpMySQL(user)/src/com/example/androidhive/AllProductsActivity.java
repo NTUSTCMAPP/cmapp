@@ -34,15 +34,17 @@ public class AllProductsActivity extends ListActivity {
 	ArrayList<HashMap<String, String>> productsList;
 
 	// url to get all products list
-	private static String url_all_users = "http://cmapp.nado.tw/android_connect_user/get_all_users.php";
+	private static String url_all_products = "http://cmapp.nado.tw/android_connect_user/get_all_users.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
-	private static final String TAG_USERS = "users";
+	private static final String TAG_Users = "Users";
+	//private static final String TAG_PID = "pid";
+	//private static final String TAG_NAME = "name";
 	private static final String TAG_UserID = "UserID";
 	private static final String TAG_UserName = "UserName";
-	private static final String TAG_BeaconID = "BeaconID";
-	
+	//private static final String TAG_BeaconID = "BeaconID";
+
 
 	// products JSONArray
 	JSONArray Users = null;
@@ -71,8 +73,7 @@ public class AllProductsActivity extends ListActivity {
 				// getting values from selected ListItem
 				String UserID = ((TextView) view.findViewById(R.id.UserID)).getText()
 						.toString();
-				
-				
+
 				// Starting new intent
 				Intent in = new Intent(getApplicationContext(),
 						EditProductActivity.class);
@@ -127,7 +128,7 @@ public class AllProductsActivity extends ListActivity {
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			// getting JSON string from URL
-			JSONObject json = jParser.makeHttpRequest(url_all_users, "GET", params);
+			JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
 			
 			// Check your log cat for JSON reponse
 			Log.d("All Products: ", json.toString());
@@ -139,24 +140,22 @@ public class AllProductsActivity extends ListActivity {
 				if (success == 1) {
 					// products found
 					// Getting Array of Products
-					Users = json.getJSONArray(TAG_USERS);
+					Users = json.getJSONArray(TAG_Users);
 
 					// looping through All Products
 					for (int i = 0; i < Users.length(); i++) {
 						JSONObject c = Users.getJSONObject(i);
 
 						// Storing each json item in variable
-						String UserID = c.getString(TAG_UserID);
-						String UserName = c.getString(TAG_UserName);
-						String BeaconID = c.getString(TAG_BeaconID);
+						String id = c.getString(TAG_UserID);
+						String name = c.getString(TAG_UserName);
 
 						// creating new HashMap
 						HashMap<String, String> map = new HashMap<String, String>();
 
 						// adding each child node to HashMap key => value
-						map.put(TAG_UserID, UserID);
-						map.put(TAG_UserName, UserName);
-						map.put(TAG_BeaconID, BeaconID);
+						map.put(TAG_UserID, id);
+						map.put(TAG_UserName, name);
 
 						// adding HashList to ArrayList
 						productsList.add(map);
@@ -192,8 +191,8 @@ public class AllProductsActivity extends ListActivity {
 					ListAdapter adapter = new SimpleAdapter(
 							AllProductsActivity.this, productsList,
 							R.layout.list_item, new String[] { TAG_UserID,
-									TAG_UserName, TAG_BeaconID},
-							new int[] { R.id.UserID, R.id.UserName, R.id.BeaconID });
+									TAG_UserName},
+							new int[] { R.id.UserID, R.id.UserName });
 					// updating listview
 					setListAdapter(adapter);
 				}
