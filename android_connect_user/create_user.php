@@ -8,19 +8,19 @@
 // array for JSON response
 $response = array();
 $responseOfGetIndex = array();
-
+echo "1";
 // include db connect class
 require_once __DIR__ . '/db_connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
-
+echo "2";
 // get all products from products table
 $responseOfGetIndex = mysql_query("SELECT MAX(UserIndex) FROM User ") or die(mysql_error());//從ＵＳＥＲ資料表
 
 // check for empty result
 if (mysql_num_rows($responseOfGetIndex) > 0) {
-    
+    echo "3";
     
     while ($row = mysql_fetch_array($responseOfGetIndex)) {
         
@@ -40,7 +40,7 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
 //echo  "加上一是".$UserIndex+1 ;
     
 }
-echo "wrong";
+echo "4";
 //echo  "加上一是".（int)$UserIndex+1 ;
 // check for required fields
 // if ( isset($_POST['UserName']) && isset($_POST['BeaconID'])) {
