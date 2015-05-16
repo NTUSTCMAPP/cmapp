@@ -25,12 +25,13 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
     $row = mysql_fetch_array($responseOfGetIndex);
 
      
-        $UserIndex = $row["max_index"];
+        $UserIndex = intval($row["max_index"]);
     
         echo "index:" . $UserIndex;
         array_push($response["Users"], $Users);
         
-   
+   $newUserID=createUserId($UserIndex+1,10);
+   echo "newUserId:" . $newUserID;
     // success
     $response["success"] = 1;
 
@@ -84,4 +85,16 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
 //     // echoing JSON response
 //     echo json_encode($response);
 // }
+
+    function createUserId($index, $length)
+    {
+        $newUserID=(string)$index;
+
+        while(strlen($newUserID)<$length){
+            $newUserID="0". $newUserID;
+        }
+        
+        return  $newUserID;
+    }
+
 ?>
