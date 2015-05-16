@@ -17,7 +17,7 @@ $db = new DB_CONNECT();
 
 // get all products from products table
 $responseOfGetIndex = mysql_query("SELECT MAX(UserIndex)AS max_index FROM User ") or die(mysql_error());//從ＵＳＥＲ資料表
-
+//Max抓最大值 並令其為max_index
 // check for empty result
 if (mysql_num_rows($responseOfGetIndex) > 0) {
 
@@ -25,12 +25,12 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
     $row = mysql_fetch_array($responseOfGetIndex);
 
      
-        $UserIndex = intval($row["max_index"]);
+        $UserIndex = intval($row["max_index"]);//String to Integer
     
         echo "index:" . $UserIndex."</br>";
         array_push($response["Users"], $Users);
         
-   $newUserID=createUserId($UserIndex+1,10);
+   $newUserID=createUserId($UserIndex+1,10);//新增userID (index,總位數)
    echo "newUserId:" . $newUserID;
     // success
     $response["success"] = 1;
