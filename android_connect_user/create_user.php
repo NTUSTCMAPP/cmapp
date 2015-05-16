@@ -21,8 +21,9 @@ $responseOfGetIndex = mysql_query("SELECT MAX(UserIndex) FROM User ") or die(mys
 // check for empty result
 if (mysql_num_rows($responseOfGetIndex) > 0) {
 
-    echo "1";
-    $row = $responseOfGetIndex->fetch_assoc();
+    echo mysql_num_rows($responseOfGetIndex);
+    $row = mysql_fetch_array($responseOfGetIndex);
+    
       echo "2";  
         $UserIndex = (int)$row["UserIndex"];
 echo "3";
