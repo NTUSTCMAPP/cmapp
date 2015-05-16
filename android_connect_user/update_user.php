@@ -11,9 +11,9 @@ $response = array();
 // check for required fields
 if (isset($_POST['UserID']) && isset($_POST['UserName']) && isset($_POST['BeaconID']) ) {
     
-    $pid = $_POST['UserID'];
-    $name = $_POST['UserName'];
-    $price = $_POST['BeaconID'];
+    $UserID = $_POST['UserID'];
+    $UserName = $_POST['UserName'];
+    $BeaconID = $_POST['BeaconID'];
     //$description = $_POST['description'];
 
     // include db connect class
@@ -23,7 +23,7 @@ if (isset($_POST['UserID']) && isset($_POST['UserName']) && isset($_POST['Beacon
     $db = new DB_CONNECT();
 
     // mysql update row with matched pid
-    $result = mysql_query("UPDATE products SET UserName = '$UserName', BeaconID = '$BeaconID' WHERE UserID = $UserID");
+    $result = mysql_query("UPDATE User SET UserName = '$UserName', BeaconID = '$BeaconID' WHERE UserID = $UserID");
 
     // check if row inserted or not
     if ($result) {

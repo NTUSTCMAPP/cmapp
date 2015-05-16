@@ -28,10 +28,10 @@ if (isset($_GET["UserID"])) {
 
             $result = mysql_fetch_array($result);
 
-            $User = array();
-            $User["UserID"] = $result["UserID"];
-            $User["UserName"] = $result["UserName"];
-            $User["BeaconID"] = $result["BeaconID"];
+            $Users = array();
+            $Users["UserID"] = $result["UserID"];
+            $Users["UserName"] = $result["UserName"];
+            $Users["BeaconID"] = $result["BeaconID"];
             //$product["description"] = $result["description"];
             //$product["created_at"] = $result["created_at"];
             //$product["updated_at"] = $result["updated_at"];
@@ -40,9 +40,9 @@ if (isset($_GET["UserID"])) {
             $response["success"] = 1;
 
             // user node
-            $response["User"] = array();
+            $response["Users"] = array();
 
-            array_push($response["User"], $User);
+            array_push($response["Users"], $Users);
 
             // echoing JSON response
             echo json_encode($response);

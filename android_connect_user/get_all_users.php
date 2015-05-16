@@ -25,17 +25,17 @@ if (mysql_num_rows($result) > 0) {
     
     while ($row = mysql_fetch_array($result)) {
         // temp user array
-        $User = array();
-        $User["UserID"] = $row["UserID"];
-        $User["UserName"] = $row["UserName"];
-        $User["BeaconID"] = $row["BeaconID"];
+        $Users = array();
+        $Users["UserID"] = $row["UserID"];
+        $Users["UserName"] = $row["UserName"];
+        $Users["BeaconID"] = $row["BeaconID"];
         //$product["created_at"] = $row["created_at"];
         //$product["updated_at"] = $row["updated_at"];
 
 
 
         // push single product into final response array
-        array_push($response["Users"], $User);
+        array_push($response["Users"], $Users);
     }
     // success
     $response["success"] = 1;
