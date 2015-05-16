@@ -26,7 +26,7 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
         
         $UserIndex = (int)$row["UserIndex"];
 
-
+        echo "USER的指標是" . $UserIndex."USER的TYPE是".get_type($UserIndex);
         array_push($response["Users"], $Users);
         break;
     }
