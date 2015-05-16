@@ -23,11 +23,11 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
 
     echo mysql_num_rows($responseOfGetIndex);
     $row = mysql_fetch_array($responseOfGetIndex);
-    
+
       echo "2";  
         $UserIndex = (int)$row["UserIndex"];
 echo "3";
-        echo "USER的指標是" . $UserIndex."USER的TYPE是".get_type($UserIndex);
+        echo "USER的指標是" . $UserIndex;//"USER的TYPE是".get_type($UserIndex);
         array_push($response["Users"], $Users);
         
     echo "4";
