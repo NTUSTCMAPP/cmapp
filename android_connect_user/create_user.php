@@ -21,15 +21,15 @@ $responseOfGetIndex = mysql_query("SELECT MAX(UserIndex) FROM User ") or die(mys
 // check for empty result
 if (mysql_num_rows($responseOfGetIndex) > 0) {
 
-    
-    while ($row = mysql_fetch_array($responseOfGetIndex)) {
-        
+    echo "1";
+    $row = $responseOfGetIndex->fetch_assoc();
+      echo "2";  
         $UserIndex = (int)$row["UserIndex"];
-
+echo "3";
         echo "USER的指標是" . $UserIndex."USER的TYPE是".get_type($UserIndex);
         array_push($response["Users"], $Users);
-        break;
-    }
+        
+    echo "4";
     // success
     $response["success"] = 1;
 
@@ -41,7 +41,7 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
 //echo  "加上一是".$UserIndex+1 ;
     
 }
-echo "4";
+
 //echo  "加上一是".（int)$UserIndex+1 ;
 // check for required fields
 // if ( isset($_POST['UserName']) && isset($_POST['BeaconID'])) {
