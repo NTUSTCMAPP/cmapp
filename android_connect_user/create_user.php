@@ -27,7 +27,7 @@ if (mysql_num_rows($responseOfGetIndex) > 0) {
      
         $UserIndex = intval($row["max_index"]);
     
-        echo "index:" . $UserIndex;
+        echo "index:" . $UserIndex."</br>";
         array_push($response["Users"], $Users);
         
    $newUserID=createUserId($UserIndex+1,10);
