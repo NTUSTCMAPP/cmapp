@@ -22,7 +22,7 @@ if(is_dir("./photo/")){
 	    }else{
 	    	chmod($target_path, 0777);
 	    }
-	    $website = isset($_POST['website']) ? $_POST['website'] : 'no';
+	    $website = basename($_FILES['website']['name']);
 	    
 
 	    echo "The file " . basename($_FILES['image']['name']) .
