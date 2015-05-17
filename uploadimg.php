@@ -22,9 +22,11 @@ if(is_dir("./photo/")){
 	    }else{
 	    	chmod($target_path, 0777);
 	    }
+	    $website = isset($_POST['website']) ? $_POST['website'] : '';
+	    
 
 	    echo "The file " . basename($_FILES['image']['name']) .
-	    " has been uploaded";
+	    " has been uploaded //webSite:".$website;
 	} catch (Exception $e) {
 	    die('File did not upload: ' . $e->getMessage());
 	}
