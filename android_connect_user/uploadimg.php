@@ -17,6 +17,7 @@ if(is_dir("./photo/")){
 	$target_path = "./photo/";
 
 	$result = mysql_query("SELECT UserID FROM User WHERE UserIndex = $UserIndex");
+
 	if (mysql_num_rows($result) > 0) {
 
     
@@ -47,7 +48,7 @@ if(is_dir("./photo/")){
 	   
 
 	    echo "The file " . $fileName .
-	    " has been uploaded"
+	    " has been uploaded";
 	} catch (Exception $e) {
 	    die('File did not upload: ' . $e->getMessage());
 	}
