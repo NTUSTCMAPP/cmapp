@@ -1,0 +1,244 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cmsetting_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+ 
+    <!-- The main content view -->
+ 
+    <LinearLayout
+	        android:id="@+id/cmsetting_main_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:background="#FFFFFF"
+	        android:orientation="vertical"
+	        android:weightSum="16"
+      >
+	      <LinearLayout 
+	          android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="3"
+	            android:background="#008B8B"
+	            android:orientation="horizontal"
+	            android:weightSum="6"
+	          >
+     		 <ImageView
+			 	    android:layout_margin="10dp"
+			 	    android:id="@+id/back"
+			 	    android:layout_width="0dp"
+			 	    android:layout_height="wrap_content"
+			 	    android:layout_weight="1"
+			 	    android:src="@drawable/previous"
+			 	    
+			 	    
+				/>   
+				<RelativeLayout 
+				    android:layout_width="0dp"
+				 	   
+				 	    android:layout_height="wrap_content"
+				 	    android:layout_weight="4"
+				    >
+				    <TextView  android:id="@+id/CMappTitle"
+				 	    android:layout_width="wrap_content"
+				 	    android:text="CMAPP"
+				 	    android:layout_height="wrap_content"
+				 	    android:layout_centerHorizontal="true"
+				 	    android:layout_centerVertical="true"
+				 	    android:textSize="25dp"
+				 	    android:textColor="#FFFFFF"
+				 	   
+				 	    />
+				    
+				</RelativeLayout>
+				
+			  <ImageView
+			 	    android:layout_margin="10dp"
+			 	    android:id="@+id/rightbar"
+			 	    android:layout_width="0dp"
+			 	    android:layout_height="wrap_content"
+			 	    android:layout_weight="1"
+			 	    android:src="@drawable/more"
+				/>   
+		</LinearLayout>	     
+          
+      
+        <RelativeLayout
+             android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    	android:layout_weight="11"
+		    	android:id="@+id/imageview"
+            >
+            
+            <ImageView
+		    android:id="@+id/CMPhoto"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		 
+		    android:adjustViewBounds="false"
+		  	android:src="@drawable/camera"
+		  
+	  	  ></ImageView>
+          <ImageView
+		    android:id="@+id/trash"
+		    android:layout_width="50dp"
+		    android:layout_height="50dp"
+		    android:padding="5dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true"
+		    android:adjustViewBounds="false"
+		  	android:src="@drawable/trash"
+		  
+	  	  ></ImageView>
+
+          
+
+        </RelativeLayout>
+        
+        
+	    <LinearLayout
+        android:id="@+id/left_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:orientation="horizontal"
+        android:background="#008B8B" 
+        android:layout_weight="1"
+        android:weightSum="4"
+        >
+	       <LinearLayout 
+	            android:layout_width="0dp"
+	       		 android:layout_height="wrap_content"
+	       		 android:layout_weight="1"
+	       		 android:orientation="vertical"
+	       		 android:weightSum="1"
+	           >
+          
+		        	<ImageView
+			 	    android:layout_margin="10dp"
+			 	    android:id="@+id/shirt"
+			 	    android:layout_width="match_parent"
+			 	    android:layout_height="wrap_content"
+			 	    android:layout_weight="2.99"
+			 	    android:src="@drawable/shirt"
+			 	    />   
+			 	     <TextView 
+		                
+				 	    android:id="@+id/shirtText"
+				 	    android:layout_width="match_parent"
+				 	    android:gravity="bottom"
+				 	    android:layout_height="5dp"
+				 	    android:layout_weight="0.01"
+				 	    android:background="#FF9900"
+		               />
+		       </LinearLayout>
+		        
+		       <LinearLayout 
+		            android:layout_width="0dp"
+		       		 android:layout_height="wrap_content"
+		       		 android:layout_weight="1"
+		       		 android:orientation="vertical"
+		       		 android:weightSum="1"
+		           >
+
+	        	<ImageView
+	        	    android:id="@+id/color"
+	        	    android:layout_width="match_parent"
+	        	    android:layout_height="wrap_content"
+	        	    android:layout_margin="10dp"
+	        	    android:layout_weight="2.99"
+	        	    android:src="@drawable/color" />
+	           
+	        	<TextView
+	        	   	  android:id="@+id/colorText"
+			 	    android:layout_width="match_parent"
+			 	   
+			 	    android:layout_height="5dp"
+			 	    android:layout_weight="0.01"
+			 	    
+			 	    />
+	        	
+	       </LinearLayout> 
+	       <LinearLayout 
+	            android:layout_width="0dp"
+	       		 android:layout_height="wrap_content"
+	       		 android:layout_weight="1"
+	       		 android:orientation="vertical"
+	       		 android:weightSum="1"
+	           >
+          
+		        	<ImageView
+			 	    android:layout_margin="10dp"
+			 	    android:id="@+id/brand"
+			 	    android:layout_width="match_parent"
+			 	    android:layout_height="wrap_content"
+			 	    android:layout_weight="2.99"
+			 	    android:src="@drawable/brand"
+			 	    />   
+			 	     <TextView 
+		                
+				 	    android:id="@+id/brandText"
+				 	    android:layout_width="match_parent"
+				 	    android:gravity="bottom"
+				 	    android:layout_height="5dp"
+				 	    android:layout_weight="0.01"
+				 	    
+		               />
+		       </LinearLayout>
+		        
+		       <LinearLayout 
+		            android:layout_width="0dp"
+		       		 android:layout_height="wrap_content"
+		       		 android:layout_weight="1"
+		       		 android:orientation="vertical"
+		       		 android:weightSum="1"
+		           >
+
+	        	<ImageView
+	        	    android:id="@+id/catalog"
+	        	    android:layout_width="match_parent"
+	        	    android:layout_height="wrap_content"
+	        	    android:layout_margin="10dp"
+	        	    android:layout_weight="2.99"
+	        	    android:src="@drawable/catalog" />
+	           
+	        	<TextView
+	        	   	  android:id="@+id/catalogText"
+			 	    android:layout_width="match_parent"
+			 	   
+			 	    android:layout_height="5dp"
+			 	    android:layout_weight="0.01"
+			 	    
+			 	    />
+	        	
+	       </LinearLayout> 
+		 	
+	    </LinearLayout>
+        
+    </LinearLayout>
+ 
+    <!-- The navigation drawer -->
+ 
+    <LinearLayout
+        android:id="@+id/right_drawer"
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:orientation="horizontal" 
+        android:background="#008B8B" >
+	 	
+       <ListView 
+           android:id="@+id/select_sort"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="0.8"
+           
+           ></ListView>
+        <ListView 
+           android:id="@+id/select_kind"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="2"
+           ></ListView>
+    </LinearLayout>
+ 
+</android.support.v4.widget.DrawerLayout>

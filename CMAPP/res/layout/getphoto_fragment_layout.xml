@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#000000"
+    android:weightSum="2"
+    >
+   
+    <RelativeLayout
+        android:layout_width="match_parent"
+   		 android:layout_height="wrap_content"
+   		 android:layout_weight="0.001"
+   		 android:background="#008B8B">
+        
+        <TextView 
+           android:text="建立廣告"
+           android:layout_height="wrap_content"
+           android:layout_width="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:textSize="30dp"
+           android:padding="5dp"
+           android:textColor="#FFFFFF"
+           
+            >
+            
+        </TextView>   
+   </RelativeLayout>
+         
+    <RelativeLayout
+      	  android:layout_width="match_parent"
+   		 android:layout_height="wrap_content"
+   		 android:layout_weight="0.6"
+        >
+    <ImageView
+        android:id="@+id/getPhotoPicture"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        
+        android:src="@drawable/camera"
+         ></ImageView>
+    <TextView 
+        android:id="@+id/getPhotoInformation"
+        android:layout_width="wrap_content"    
+        android:layout_height="wrap_content"
+      	android:layout_centerHorizontal="true"
+      	android:text="請選擇要做為廣告的照片！"
+      	android:textColor="#FFFFFF"
+      	android:textSize="20dp"
+      	android:layout_alignParentBottom="true"
+      	android:layout_marginBottom="10dp"
+        ></TextView>
+    
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2" >
+		<RelativeLayout 
+		     android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_centerHorizontal="true"
+	        
+		    >
+        <Button
+            android:id="@+id/getFromCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="20dp"
+            android:text="相機"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/getFromGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/getFromCamera"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="20dp"
+            android:text="相簿"
+            android:textColor="#FFFFFF" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

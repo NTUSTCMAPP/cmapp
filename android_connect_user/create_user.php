@@ -16,7 +16,8 @@ require_once __DIR__ . '/db_connect.php';
 $db = new DB_CONNECT();
 
 // get all products from products table
-$responseOfGetIndex = mysql_query("SELECT MAX(UserIndex)AS max_index FROM User ") or die(mysql_error());//從ＵＳＥＲ資料表
+$SQLString="SELECT MAX(UserIndex)AS max_index FROM User ";
+$responseOfGetIndex = mysql_query($SQLString) or die(mysql_error());//從ＵＳＥＲ資料表
 //Max抓最大值 並令其為max_index
 // check for empty result
 if (mysql_num_rows($responseOfGetIndex) > 0) {

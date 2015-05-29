@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:weightSum="1" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1" >
+        
+        <TextView
+             android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_centerHorizontal="true"
+    		android:layout_centerVertical="true"
+    		android:text="Beacon ID"
+    		android:textSize="30dp"
+            ></TextView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:weightSum="6" 
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        
+        >
+
+        <EditText 
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.8"
+			
+            android:hint="00"
+            android:id="@+id/beaconAdd1"
+            android:textSize="10dp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.2"
+			android:text=":">
+            
+            
+        </TextView>
+        <EditText 
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.8"
+            android:hint="00"
+            android:id="@+id/beaconAdd2"
+            android:textSize="10dp"
+            android:textColor="#000000"/>
+        <TextView
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.2"
+			android:text=":">
+            
+            
+        </TextView>
+        <EditText 
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.8"
+            android:hint="00"
+            android:id="@+id/beaconAdd3"
+            android:textSize="10dp"
+            android:textColor="#000000"/>
+        <TextView
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.2"
+			android:text=":">
+            
+            
+        </TextView>
+        <EditText 
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.8"
+            android:hint="00"
+            android:id="@+id/beaconAdd4"
+            android:textSize="10dp"
+            android:textColor="#000000"/>
+        <TextView
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.2"
+			android:text=":">
+            
+            
+        </TextView>
+        <EditText 
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.8"
+            android:hint="00"
+            android:id="@+id/beaconAdd5"
+            android:textSize="10dp"
+            android:textColor="#000000"/>
+        <TextView
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.2"
+			android:text=":">
+            
+            
+        </TextView>
+        <EditText 
+            android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+			android:layout_weight="0.8"
+            android:hint="00"
+            android:id="@+id/beaconAdd6"
+            android:textSize="10dp"
+            android:textColor="#000000"/>
+       
+    </LinearLayout>
+
+	 <LinearLayout
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_weight="0.1" 
+	     android:orientation="horizontal"
+	     android:layout_marginBottom="10dp"
+	     >
+        <Button
+             android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		
+    		android:layout_centerVertical="true"
+    		android:text="CANCLE"
+    		android:layout_weight="0.1"
+    		android:id="@+id/connectCancle"
+            android:background="#008B8B"
+            ></Button>
+        <Button
+             android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		
+    		android:layout_centerVertical="true"
+    		android:text="SAVA"
+    		android:layout_weight="0.1"
+    		android:id="@+id/connectOK"
+    		android:background="#008B8B"
+            ></Button>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="select">#FF9900</color>
+    <color name="unselect">#008B8B</color>
+    
+    <array name="clothColors">
+		<item>#FFFFFF</item>
+		<item>#000000</item>
+		<item>#0000FF</item>
+		<item>#FF0000</item>
+		<item>#FFFF00</item>
+		<item>#00FF00</item>
+		<item>#9900CC</item>
+		<item>#FF00FF</item>
+		<item>#BEBEBE</item>
+		<item>#FF9900</item>
+		<item>#CC9900</item>
+		<item>#FFFFCC</item>
+		<item>#008B8B</item>
+		<item>#ffffE0</item>
+		<item>#F5DEB3</item>
+		<item>#6A5ACD</item>
+	</array>
+	
+	<string-array name="colorName">
+		<item>白</item>
+		<item>黑</item>
+		<item>藍</item>
+		<item>紅</item>
+		<item>黃</item>
+		<item>綠</item>
+		<item>紫</item>
+		<item>粉紅</item>
+		<item>灰</item>
+		<item>橘</item>
+		<item>咖啡</item>
+		<item>cream</item>
+		<item>darkcyan</item>
+		<item>lightyellow</item>
+		<item>wheat</item>
+		<item>slateblue</item>
+	</string-array>
+	
+	
+	<integer name="colorSum">16</integer>
+</resources>

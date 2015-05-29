@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="brandName">
+		<item>UINQLO</item>
+		<item>Lativ</item>
+		
+	</string-array>
+	<array name="brandkind_images">
+		<item>@drawable/uniqlo</item>
+		<item>@drawable/lativ</item>
+	</array>
+	<integer name="brandSum">2</integer>
+</resources>
