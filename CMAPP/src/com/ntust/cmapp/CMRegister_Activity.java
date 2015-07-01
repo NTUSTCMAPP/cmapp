@@ -3,27 +3,42 @@ package com.ntust.cmapp;
 
 
 
+
+
+
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothManager;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-public class CMRegister_Activity extends Activity {
+public class CMRegister_Activity extends Activity implements BluetoothAdapter.LeScanCallback{
 	private LinearLayout mainLayout;
 	public LinearLayout cmregister_parent_layout;
 	public Uri mPictureUri; 
@@ -33,6 +48,34 @@ public class CMRegister_Activity extends Activity {
 	public TextView[] navbarLine=new TextView[4];
 	private Fragment[] navFragment= new Fragment[4];
 	private int unselectColor,selectColor;
+	private Map<String, String> beaconMAC =new HashMap<String, String>();
+	/*BLE*///////////
+	
+	
+	 /** BLE 機器スキャンタイムアウト (ミリ秒) */
+    private static final long SCAN_PERIOD = 5000;
+    /** 検索機器の機器名 */
+    private static final String DEVICE_NAME = "SensorTag";
+    /** 対象のサービスUUID */
+    private static final String DEVICE_BUTTON_SENSOR_SERVICE_UUID = "0000ffe0-0000-1000-8000-00805f9b34fb";
+    /** 対象のキャラクタリスティックUUID */
+    private static final String DEVICE_BUTTON_SENSOR_CHARACTERISTIC_UUID = "0000ffe1-0000-1000-8000-00805f9b34fb";
+    /** キャラクタリスティック設定UUID */
+    private static final String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
+ 
+    private static final String TAG = "BLESample";
+    private BleStatus mStatus = BleStatus.DISCONNECTED;
+    private Handler mHandler;
+    private BluetoothAdapter mBluetoothAdapter;
+    private BluetoothManager mBluetoothManager;
+    private BluetoothGatt mBluetoothGatt;
+    private TextView mStatusText;
+
+	
+	
+	
+	/*BLE*///////////
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +108,49 @@ public class CMRegister_Activity extends Activity {
         unselectColor=getResources().getColor(R.color.unselect);
         selectColor=getResources().getColor(R.color.select);
         
+        
+        mBluetoothManager = (BluetoothManager)getSystemService(BLUETOOTH_SERVICE);
+        mBluetoothAdapter = mBluetoothManager.getAdapter();
+ 
+       
+        
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                mStatusText.setText(((BleStatus) msg.obj).name());
+            }
+        };
+        connect();
+        
+    }
+    private void showMAC(){
+    	String beaconIDtxt="";
+        for (Map.Entry<String,String> entry : beaconMAC.entrySet()) {
+        	beaconIDtxt+=entry.getKey();
+        	beaconIDtxt+="\n";
+        }	
+        Toast toast =Toast.makeText(CMRegister_Activity.this,beaconIDtxt, Toast.LENGTH_LONG);
+        
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+    }
+    private void connect() {
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            	showMAC();
+                mBluetoothAdapter.stopLeScan(CMRegister_Activity.this);
+                if (BleStatus.SCANNING.equals(mStatus)) {
+                    setStatus(BleStatus.SCAN_FAILED);
+                }
+            }
+        }, SCAN_PERIOD);
+        
+      
+        mBluetoothAdapter.stopLeScan(this);
+        mBluetoothAdapter.startLeScan(this);
+        
+        //setStatus(BleStatus.SCANNING);
     }
     
 	@Override
@@ -91,6 +177,15 @@ public class CMRegister_Activity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			String beaconIDtxt="";
+	        for (Map.Entry<String,String> entry : beaconMAC.entrySet()) {
+	        	beaconIDtxt+=entry.getKey();
+	        	beaconIDtxt+="\n";
+	        }	
+	        Toast toast =Toast.makeText(CMRegister_Activity.this,beaconIDtxt, Toast.LENGTH_LONG);
+	        
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
 			for(int i=0;i<4;i++){
 				
 				navbarLine[i].setBackgroundColor(unselectColor);
@@ -123,22 +218,47 @@ public class CMRegister_Activity extends Activity {
     }
     
     
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.cmregister_, menu);
-        return true;
-    }
+   
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
+        Log.d(TAG, "device found: " + device.getName());
+        beaconMAC.put(device.getAddress(), device.getAddress());
+       
+        //TextView mac=(TextView)findViewById(R.id.mac);
+       // mac.setText(mac.getText()+device.getAddress());
+       /* if (DEVICE_NAME.equals(device.getName())) {
+            setStatus(BleStatus.DEVICE_FOUND);
+            
+            mac.setText(device.getAddress());
+            // 省電力のためスキャンを停止する
+            mBluetoothAdapter.stopLeScan(this);
+ 
+            // GATT接続を試みる
+            mBluetoothGatt = device.connectGatt(this, false, mBluetoothGattCallback);
+        }*/
     }
+    private void setStatus(BleStatus status) {
+        mStatus = status;
+        mHandler.sendMessage(status.message());
+    }
+    private enum BleStatus {
+        DISCONNECTED,
+        SCANNING,
+        SCAN_FAILED,
+        DEVICE_FOUND,
+        SERVICE_NOT_FOUND,
+        SERVICE_FOUND,
+        CHARACTERISTIC_NOT_FOUND,
+        NOTIFICATION_REGISTERED,
+        NOTIFICATION_REGISTER_FAILED,
+        CLOSED
+        ;
+        public Message message() {
+            Message message = new Message();
+            message.obj = this;
+            return message;
+        }
+    }
+    
 }
