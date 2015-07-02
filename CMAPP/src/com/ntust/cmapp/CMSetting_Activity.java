@@ -11,18 +11,26 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.R.string;
 import android.app.Activity;
@@ -58,6 +66,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -85,6 +94,8 @@ public class CMSetting_Activity extends Activity {
 	private Map<String, ImageView> photoCatalog =new HashMap<String, ImageView>();//新增物件顏色view
 	private Map<String, String> photoCatalogNum =new HashMap<String, String>();//新增顏色物件代號
 	
+	JSONObject UploadSuccessJsonobject = new JSONObject();
+	String BeaconInput ="";//傳出去的Beacon值
 	final int PIC_CROP = 1;
 	long totalSize = 0;
 	private Boolean dragNow=false;
@@ -423,24 +434,10 @@ public class CMSetting_Activity extends Activity {
 		}
 		
 	};
-	private void showDetail(){
+	private void showDetail(String txtInput){
 		
-		String txt="";
-    	for (Map.Entry<String,String> entry : photoid.entrySet()) {
-    			String id= entry.getKey();
-			  txt+="ID:"+ id;
-			  txt+="\n"+"TopMargin:"+photoParams.get(id).topMargin;
-			  txt+="\n"+"LeftMargin:"+photoParams.get(id).leftMargin;
-			  txt+="\n"+"Width:"+photoParams.get(id).width;
-			  txt+="\n"+"Height:"+photoParams.get(id).height;
-			  txt+="\n"+"Rotation:"+photoView.get(id).getRotation();
-			  txt+="\n"+"Sort:"+photoSort.get(id);
-			  txt+="\n"+"Kind:"+photoKind.get(id);
-	          txt+="\n"+"Color:"+colorName[Integer.parseInt(photoColorNum.get(id))];
-	          txt+="\n"+"Brand:"+brandName[Integer.parseInt(photoBrandNum.get(id))];
-	          txt+="\n"+"Catalog:"+catalogName[Integer.parseInt(photoCatalogNum.get(id))];
-			  txt+="\n";
-		}	
+		String txt=txtInput;
+    	
         
         	new AlertDialog.Builder(CMSetting_Activity.this)
 			.setTitle("圖片資訊")
@@ -460,7 +457,8 @@ public class CMSetting_Activity extends Activity {
 		public void onClick(View v) {
 			
 			if(v.getId()==R.id.connectOK){
-				new UploadFileToServer().execute();
+				new EnterBeaconID().execute();
+				
 				
 				Toast toast =Toast.makeText(CMSetting_Activity.this,"上傳圖片中", Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
@@ -891,7 +889,7 @@ public class CMSetting_Activity extends Activity {
 			try {
 				MultipartEntity reqEntity = new MultipartEntity();
 				reqEntity.addPart("image",
-						"1", in);
+						BeaconInput, in);
 				
 				httppost.setEntity(reqEntity);
 				
@@ -956,7 +954,7 @@ public class CMSetting_Activity extends Activity {
 			// showing the server response in an alert dialog
 			
 			Progressdlg.cancel();
-			showDetail();
+			//showDetail();
 			super.onPostExecute(result);
 		}
 
@@ -1065,4 +1063,117 @@ public class CMSetting_Activity extends Activity {
         double radians = Math.atan2(delta_y, delta_x);
         return (float) Math.toDegrees(radians);
     }
+    class EnterBeaconID extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		
+		}
+
+		/**
+		 * Entering BeaconID
+		 * */
+		@Override
+		protected String doInBackground(String... args) {
+
+			JSONObject UploadObject = new JSONObject();
+			
+			JSONArray ItemJsonarray = new JSONArray();
+			for (Map.Entry<String,String> entry : photoid.entrySet()) {
+				JSONObject ItemObject = new JSONObject();
+				String id= entry.getKey();
+				try {
+					ItemObject.put("Width", photoParams.get(id).width);
+					ItemObject.put("Height", photoParams.get(id).height);
+					ItemObject.put("Top", photoParams.get(id).topMargin);
+					ItemObject.put("Left", photoParams.get(id).leftMargin);
+					ItemObject.put("Type", photoSort.get(id));
+					ItemObject.put("Color", photoColorNum.get(id));
+					ItemObject.put("Brand", brandName[Integer.parseInt(photoBrandNum.get(id))]);
+					ItemJsonarray.put(ItemObject);
+					Log.d("mylog", "ItemObject.put");
+				} catch (JSONException e) {
+					e.printStackTrace();
+					Log.d("mylog", "error3");
+				}
+			}	
+			Log.d("mylog", "EditText");
+
+			
+			EditText BeaconInput1 = (EditText) dlg.findViewById(R.id.beaconAdd1);
+			EditText BeaconInput2 = (EditText) dlg.findViewById(R.id.beaconAdd2);
+			EditText BeaconInput3 = (EditText) dlg.findViewById(R.id.beaconAdd3);
+			EditText BeaconInput4 = (EditText) dlg.findViewById(R.id.beaconAdd4);
+			EditText BeaconInput5 = (EditText) dlg.findViewById(R.id.beaconAdd5);
+			EditText BeaconInput6 = (EditText) dlg.findViewById(R.id.beaconAdd6);
+			BeaconInput = BeaconInput1.getText().toString()+"-"+BeaconInput2.getText().toString()+"-"+BeaconInput3.getText().toString()+"-"+BeaconInput4.getText().toString()+"-"+BeaconInput5.getText().toString()+"-"+BeaconInput6.getText().toString();
+			try {
+				UploadObject.put("BeaconID", BeaconInput);
+				UploadObject.put("Item", ItemJsonarray);
+				Log.d("mylog", "UploadObject.put");
+			} catch (JSONException e) {
+				e.printStackTrace();
+				Log.d("mylog", "error2");
+			}
+			
+
+			
+			ArrayList<NameValuePair> jsonarray = new ArrayList<NameValuePair>();
+			
+
+			jsonarray.add(new BasicNameValuePair("Upload", UploadObject.toString()));// 重要！！
+			try {
+				// Note that create product url accepts POST method
+
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpPost httpPost = new HttpPost("http://cmapp.nado.tw/android_connect_user/upload_item.php");
+				httpPost.setEntity(new UrlEncodedFormEntity(jsonarray,HTTP.UTF_8));
+				HttpResponse httpResponse = httpClient.execute(httpPost); 
+				HttpEntity httpEntity = httpResponse.getEntity();
+				
+				try {
+					String json = EntityUtils.toString(httpEntity);
+					UploadSuccessJsonobject = new JSONObject(json);
+				} catch (JSONException ex) {
+					Log.d("mylog", "error1");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				Log.d("mylog", "error");
+			}
+			return null;
+		}
+
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once done
+			
+			String UploadSuccessInput = UploadSuccessJsonobject.toString();
+			
+			try {
+
+				String echoSuccess = UploadSuccessJsonobject.getString("Success");
+				Log.d("mylog", "Success:"+echoSuccess);
+
+				
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			//showDetail(UploadSuccessInput);
+			new UploadFileToServer().execute();
+			Progressdlg.cancel();
+			super.onPostExecute(file_url);
+		}
+
+	}
 }

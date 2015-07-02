@@ -11,18 +11,18 @@ require_once __DIR__ . '/db_connect.php';
 
 if(is_dir("../photo/")){
 	$db = new DB_CONNECT();
-	$UserIndex = basename($_FILES['image']['name']);
-	echo $UserIndex;
+	$BeaconID = basename($_FILES['image']['name']);
+	echo $BeaconID;
 	$fileName="";
 	$target_path = "../photo/";
 
-	$result = mysql_query("SELECT UserID FROM User WHERE UserIndex = $UserIndex");
+	$result = mysql_query("SELECT UserID ,AdID FROM User WHERE BeaconID = '$BeaconID'");
 
 	if (mysql_num_rows($result) > 0) {
 
     
   	  	$row = mysql_fetch_array($result);
-		$fileName =$row["UserID"];
+		$fileName =$row["UserID"].$row["AdID"];
 		$target_path = $target_path . $fileName.".jpg";
 
     }else{

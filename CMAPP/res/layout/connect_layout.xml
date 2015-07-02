@@ -42,6 +42,7 @@
             android:id="@+id/beaconAdd1"
             android:textSize="10dp"
             android:textColor="#000000"
+            android:text="00"
             />
         <TextView
             android:layout_width="0dp"
@@ -58,7 +59,8 @@
             android:hint="00"
             android:id="@+id/beaconAdd2"
             android:textSize="10dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:text="00"/>
         <TextView
             android:layout_width="0dp"
 		    android:layout_height="wrap_content"
@@ -74,7 +76,8 @@
             android:hint="00"
             android:id="@+id/beaconAdd3"
             android:textSize="10dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:text="00"/>
         <TextView
             android:layout_width="0dp"
 		    android:layout_height="wrap_content"
@@ -90,7 +93,8 @@
             android:hint="00"
             android:id="@+id/beaconAdd4"
             android:textSize="10dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:text="00"/>
         <TextView
             android:layout_width="0dp"
 		    android:layout_height="wrap_content"
@@ -106,7 +110,8 @@
             android:hint="00"
             android:id="@+id/beaconAdd5"
             android:textSize="10dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:text="00"/>
         <TextView
             android:layout_width="0dp"
 		    android:layout_height="wrap_content"
@@ -122,7 +127,8 @@
             android:hint="00"
             android:id="@+id/beaconAdd6"
             android:textSize="10dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:text="00"/>
        
     </LinearLayout>
 
@@ -148,7 +154,7 @@
     		android:layout_height="wrap_content"
     		
     		android:layout_centerVertical="true"
-    		android:text="SAVA"
+    		android:text="SAVE"
     		android:layout_weight="0.1"
     		android:id="@+id/connectOK"
     		android:background="#008B8B"
