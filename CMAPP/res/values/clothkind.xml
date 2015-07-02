@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="clothes">
+        <item>上身</item>
+        <item>下著</item>
+        <item>連身</item>
+        <item>配件</item>
+        <item>鞋子</item>
+        <item>包包</item>
+    </string-array>
+    
+     <array name="clothes_images">
+		<item>@drawable/shirticon</item>
+		<item>@drawable/pants</item>
+		<item>@drawable/dress</item>
+		<item>@drawable/accessory</item>
+		<item>@drawable/shoes</item>
+		<item>@drawable/bag</item>
+	</array>
+
     <string-array name="clothkind">
         <item>短袖上衣</item>
         <item>無袖上衣</item>
         <item>長袖上衣</item>
-        <item>洋裝</item>
     </string-array>
+
     <string-array name="pantskind">
         <item>短褲</item>
         <item>長褲</item>
         <item>短裙</item>
-        
     </string-array>
+
+    <string-array name="dresskind">
+        <item>洋裝</item>
+        <item>工作服</item>
+    </string-array>
+
     <string-array name="shoeskind">
         <item>布鞋</item>
         <item>長靴</item>
         <item>高跟鞋</item>
     </string-array>
+
     <string-array name="accessorykind">
         <item>包包</item>
         <item>太陽眼鏡</item>
@@ -44,10 +68,11 @@
 		<item>@drawable/accessory2</item>
 		
 	</array>
-	<integer name="clothSum">4</integer>
+	<integer name="clothSum">3</integer>
 	<integer name="pantsSum">3</integer>
 	<integer name="shoesSum">3</integer>
 	<integer name="accessorySum">2</integer>
-	
+	<integer name="clothesType">5</integer>
+	<integer name="clothesSum">6</integer>
 	
 </resources>

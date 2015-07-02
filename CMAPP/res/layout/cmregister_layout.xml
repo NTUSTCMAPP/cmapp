@@ -55,6 +55,7 @@
 		 	   
 		 	    android:layout_height="10dp"
 		 	    android:layout_weight="0.01"
+		 	    android:background="#FF9900"
 		 	   
 		 	    />
          </LinearLayout> 
@@ -81,7 +82,7 @@
 		 	   
 		 	    android:layout_height="10dp"
 		 	    android:layout_weight="0.01"
-		 	    android:background="#FF9900"
+		 	    
 		 	    />
         	
        </LinearLayout> 

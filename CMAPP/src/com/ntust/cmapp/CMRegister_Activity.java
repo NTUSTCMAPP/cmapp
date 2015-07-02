@@ -86,16 +86,16 @@ public class CMRegister_Activity extends Activity implements BluetoothAdapter.Le
         mainLayout =(LinearLayout)findViewById(R.id.main_layout);//抓取主要畫面位置
       //  navbar = (LinearLayout) findViewById(R.id.left_drawer);//抓取側邊欄位置
         cmregister_parent_layout=(LinearLayout)findViewById(R.id.cmregister_parent_layout);//最外層顯示位置
-        GetPhoto_Fragment getphotofragment =new GetPhoto_Fragment();//建立GetPhoto Fragment
+        CMBrowse_Fragment getphotofragment =new CMBrowse_Fragment();//建立GetPhoto Fragment
         creatFragment(getphotofragment);//顯示GetPhoto Fragment
         
         navbar[0] =(ImageView)findViewById(R.id.home);
         navbar[1] =(ImageView)findViewById(R.id.picture);
         navbar[2] =(ImageView)findViewById(R.id.search);
         navbar[3] =(ImageView)findViewById(R.id.more);
-        navFragment[0]=(Fragment)new Search_Activity();
+        navFragment[0]=(Fragment)new CMBrowse_Fragment();
         navFragment[1]=(Fragment)new GetPhoto_Fragment();
-        navFragment[2]=(Fragment)new Home_Fragment();
+        navFragment[2]=(Fragment)new Search_Activity();
         navFragment[3]=(Fragment)new Home_Fragment();
         navbar[0].setOnClickListener(navbarListener);
         navbar[1].setOnClickListener(navbarListener);
