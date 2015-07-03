@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Display;
@@ -34,7 +35,7 @@ public class CMBrowse_Fragment extends ListFragment {
 	    ArrayList<String> customerItemId = new ArrayList<String>();
 	    Map<String,ArrayList<String>> customerItemListMap = new HashMap<String,ArrayList<String>>();
 	    Map<String, Customer> itemInfo = new HashMap<String,Customer>();
-	    
+	    Map<String,Bitmap> customerphoto = new HashMap<String,Bitmap>();
 	    private ListView mListView;
 	    int screen_width;
 	    int UserID = 0;
@@ -60,6 +61,7 @@ public class CMBrowse_Fragment extends ListFragment {
 		
 		customerItemListMap=allMap.get("customerItemListMap");
 		itemInfo=allMap.get("itemInfo");
+		customerphoto=allMap.get("customerphoto");
 		
 		Type=new String[getResources().getInteger(R.integer.clothesSum)];
 		Type=getResources().getStringArray(R.array.clothes);
@@ -174,7 +176,8 @@ public class CMBrowse_Fragment extends ListFragment {
 	            
 	            RelativeLayout main_layout =(RelativeLayout)convertView.findViewById(R.id.main_layout);
 	            ImageView mImgPhoto =(ImageView)convertView.findViewById(R.id.photo);//顯示使用者照片
-	           mImgPhoto.setImageResource(R.drawable.photo);
+	            mImgPhoto.setImageBitmap(customerphoto.get(customerId.get(customerindex)));
+	           //mImgPhoto.setImageResource(R.drawable.photo);
 
 	            ArrayList<String> thisList =customerItemListMap.get(customerId.get(customerindex));
 	            LinearLayout logo_layout =(LinearLayout)convertView.findViewById(R.id.logo_layout);

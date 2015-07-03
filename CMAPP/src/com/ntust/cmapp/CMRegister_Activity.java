@@ -6,15 +6,36 @@ package com.ntust.cmapp;
 
 
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.ntust.cmapp.CMSetting_Activity.EnterBeaconID;
+
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -24,7 +45,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +58,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,8 +68,10 @@ import android.widget.Toast;
 public class CMRegister_Activity extends Activity implements BluetoothAdapter.LeScanCallback{
 	public Map<String, String> customerID = new HashMap<String, String>();
 	public Map<String, Customer> itemInfo = new HashMap<String,Customer>();
+	public Map<String,Bitmap> customerphoto = new HashMap<String,Bitmap>();
 	public ArrayList<String> customerItemID = new ArrayList<String>();
 	public Map<String, ArrayList<String>> customerItemListMap = new HashMap<String, ArrayList<String>>();
+	public String beaconInfo[];
 	public HashMap<String, Map> allMap =new HashMap<String,Map>();
 	private LinearLayout mainLayout;
 	public LinearLayout cmregister_parent_layout;
@@ -60,7 +87,7 @@ public class CMRegister_Activity extends Activity implements BluetoothAdapter.Le
 	
 	
 	 /** BLE 機器スキャンタイムアウト (ミリ秒) */
-    private static final long SCAN_PERIOD = 5000;
+    private static final long SCAN_PERIOD = 1000;
     /** 検索機器の機器名 */
     private static final String DEVICE_NAME = "SensorTag";
     /** 対象のサービスUUID */
@@ -77,6 +104,9 @@ public class CMRegister_Activity extends Activity implements BluetoothAdapter.Le
     private BluetoothManager mBluetoothManager;
     private BluetoothGatt mBluetoothGatt;
     private TextView mStatusText;
+    JSONObject ReturnInfoJsonobject = new JSONObject();
+    String[] customerphotoName ;
+    
 
 	
 	
@@ -168,11 +198,12 @@ public class CMRegister_Activity extends Activity implements BluetoothAdapter.Le
         }	
         Toast toast =Toast.makeText(CMRegister_Activity.this,beaconIDtxt, Toast.LENGTH_LONG);
         
+        new GetItemInfo().execute();//傳出BeaconID收回Item資訊
+        
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
-		inputCustomer();
-		 CMBrowse_Fragment getphotofragment =new CMBrowse_Fragment();//建立GetPhoto Fragment
-         creatFragment(getphotofragment);//顯示GetPhoto Fragment
+		//inputCustomer();
+		
     }
     private void connect() {
         mHandler.postDelayed(new Runnable() {
@@ -247,6 +278,7 @@ public class CMRegister_Activity extends Activity implements BluetoothAdapter.Le
     	allMap.put("customerID", customerID);
     	allMap.put("customerItemListMap", customerItemListMap);
     	allMap.put("itemInfo", itemInfo);
+    	allMap.put("customerphoto", customerphoto);
     	extras.putSerializable("allMap", allMap);
     	//Intent intent=new Intent();
     	//intent.putExtra("allMap", extras);
@@ -311,4 +343,219 @@ public class CMRegister_Activity extends Activity implements BluetoothAdapter.Le
         }
     }
     
+    
+    class GetItemInfo extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		
+		}
+
+		/**
+		 * Entering BeaconID
+		 * */
+		@Override
+		protected String doInBackground(String... args) {
+
+			JSONObject UploadBeaconIDObject = new JSONObject();
+			
+			String FakeBeaconID = "00-00-00-00-00-00";
+			String FakeBeaconID2 = "22-33-22-00-00-55";
+			JSONArray BeaconJsonarray = new JSONArray();
+			ArrayList<NameValuePair> jsonarray = new ArrayList<NameValuePair>();
+			BeaconJsonarray.put(FakeBeaconID);
+			BeaconJsonarray.put(FakeBeaconID2);
+			
+			try {
+				UploadBeaconIDObject.put("Beacon", BeaconJsonarray);//格式
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			
+			jsonarray.add(new BasicNameValuePair("Beacon", UploadBeaconIDObject.toString()));// 重要！！
+			try {
+				// Note that create product url accepts POST method
+
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpPost httpPost = new HttpPost("http://cmapp.nado.tw/android_connect_user/get_user_Ad.php");
+				httpPost.setEntity(new UrlEncodedFormEntity(jsonarray,HTTP.UTF_8));
+				HttpResponse httpResponse = httpClient.execute(httpPost); 
+				HttpEntity httpEntity = httpResponse.getEntity();
+				Log.d("mylog", "ENTER");
+				try {
+					String json = EntityUtils.toString(httpEntity);
+					
+					ReturnInfoJsonobject = new JSONObject(json);
+					Log.d("mylog", "RRRRR");
+					Log.d("mylog", ReturnInfoJsonobject.toString());
+				} catch (JSONException ex) {
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				Log.d("mylog", "error");
+			}
+			return null;
+			
+		}
+
+		/**
+		 * After completing background task Dismiss the progress dialog
+		 * **/
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog once done
+			
+			String ReturnInfo = ReturnInfoJsonobject.toString();
+			
+			try {
+				JSONArray jsonarray = ReturnInfoJsonobject.getJSONArray("AllAd");
+				JSONObject AllItemjsonobject = new JSONObject(); 
+				int length1 = jsonarray.length(); 
+				int customerSize=customerID.size();
+				customerphotoName=new String[length1];
+				for(int i=0;i<length1;i++){
+					AllItemjsonobject=jsonarray.getJSONObject(i);//找第i條
+					
+					String echoUserID = AllItemjsonobject.getString("UserID");
+					String echoAdID = AllItemjsonobject.getString("AdID");//抓userID, AdID
+					customerphotoName[i]=echoUserID+echoAdID;
+					JSONArray jsonarray2 = AllItemjsonobject.getJSONArray("Item");
+					JSONObject PartItemjsonobject = new JSONObject(); 
+					int length2 = jsonarray2.length(); 
+					customerID.put(String.valueOf(customerSize+i+1), echoUserID+echoAdID);
+					
+					for(int j=0;j<length2;j++){
+						PartItemjsonobject=jsonarray2.getJSONObject(j);//找第j條
+						Log.d("mylog", PartItemjsonobject.toString());
+						
+						//String UserID = PartItemjsonobject.getString("UserID");
+						//String AdID = PartItemjsonobject.getString("AdID");
+						int ItemIndex = Integer.parseInt(PartItemjsonobject.getString("ItemIndex"));
+						int ItemWidth = Integer.parseInt(PartItemjsonobject.getString("ItemWidth"));
+						
+						int ItemHeight = Integer.parseInt(PartItemjsonobject.getString("ItemHeight"));
+						int ItemTop = Integer.parseInt(PartItemjsonobject.getString("ItemTop"));
+						int ItemLeft = Integer.parseInt(PartItemjsonobject.getString("ItemLeft"));
+						int ItemType = Integer.parseInt(PartItemjsonobject.getString("ItemType"));
+						int ItemColor = Integer.parseInt(PartItemjsonobject.getString("ItemColor"));
+						String ItemBrand = PartItemjsonobject.getString("ItemBrand");
+						int ItemSex = Integer.parseInt(PartItemjsonobject.getString("ItemSex"));
+						
+						
+						Log.d("mylog", echoUserID);
+						Log.d("mylog", echoAdID);
+						Log.d("mylog", "_____");
+						String CustomerItemID = echoUserID + ( ItemIndex+1<10 ? ("0"+ItemIndex+1) : ItemIndex+1);
+						Customer customerItem = new Customer(echoUserID, ItemWidth, ItemHeight, ItemTop, ItemLeft, ItemBrand, ItemType, ItemColor, ItemSex);
+						
+						customerItemID.add(CustomerItemID);
+			            itemInfo.put(CustomerItemID, customerItem);
+			            
+			            
+					}
+					
+					customerItemListMap.put(echoUserID+echoAdID,customerItemID);
+		            customerItemID = new ArrayList<String>();
+				}
+				imgDownLoader id =new imgDownLoader(CMRegister_Activity.this);
+				id.execute(customerphotoName);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			 
+			//showDetail(UploadSuccessInput);
+			
+		}
+
+	}
+    
+    public class imgDownLoader extends AsyncTask<String, Integer, Bitmap[]> {
+		private ProgressDialog progressDialog_;
+		private Activity uiActivity_;
+		 public imgDownLoader(Activity activity) {
+		        super();
+		        uiActivity_ = activity;
+		        
+		    }
+		protected void onPreExecute() {
+//			progressDialog_ = new ProgressDialog(uiActivity_);
+//	        progressDialog_.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//	        progressDialog_.setIndeterminate(false);
+//	        progressDialog_.show();
+		}
+		@Override
+		protected Bitmap[] doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				Bitmap[] outBitmap = new Bitmap[customerphotoName.length]; 
+				for(int i=0;i<customerphotoName.length;i++){
+					Log.d("mylog","photoName:"+customerphotoName[i]);
+					URL url=new URL("http://cmapp.nado.tw/photo/"+customerphotoName[i]+".jpg");
+					HttpURLConnection httpCon =(HttpURLConnection) url.openConnection();
+					Log.d("mylog","photoName01:"+customerphotoName[i]);
+					httpCon.connect();
+					Log.d("mylog","photoName02:"+customerphotoName[i]);
+					if(httpCon.getResponseCode()!=200){
+						throw new Exception("Failed to Connect!");
+					}
+					InputStream is =httpCon.getInputStream();
+					Log.d("mylog","photoName03:"+customerphotoName[i]);
+					outBitmap[i] = BitmapFactory.decodeStream(is);   
+					Log.d("mylog","photoName04:"+customerphotoName[i]);
+					 
+				      /*  int width_  = outBitmap[i].getWidth();
+				        int height_ = outBitmap[i].getHeight();
+				        int totalPixcel = width_ * height_;
+				        //progressDialog_.setMax(totalPixcel);
+				 
+				        int k,j;
+				        for(k = 0; k < width_; k++) {
+				            for(j = 0; j < height_; j++) {
+				                int pixelColor = outBitmap[i].getPixel(k, j);
+				              // outBitmap.setPixel(i, j, Color.argb(60, Color.red(pixelColor), Color.green(pixelColor), Color.blue(pixelColor)));
+				            }
+				            //publishProgressメソッドを呼ぶことで
+				            //onProgressUpdateメソッドが呼ばれ、進捗状況がUIスレッドで表示されます。
+				            //publishProgress(k+j);
+				        }
+				       */
+				}
+				
+				
+				return outBitmap;
+				
+			} catch (Exception e) {
+				Log.d("mylog","Faild to load Img!");
+				// TODO: handle exception
+			}
+			return null;
+		}
+		 @Override
+		    protected void onProgressUpdate(Integer... progress) {
+		        //progressDialog_.incrementProgressBy(progress[0]);
+		    }
+		
+		protected void onPostExecute(Bitmap[] img) {
+			Log.d("mylog","onPostExecute");
+			if(img!=null){
+				for(int i=0;i<img.length;i++){
+					customerphoto.put(customerphotoName[i], img[i]);
+				}
+				
+				
+				
+			}
+			CMBrowse_Fragment getphotofragment =new CMBrowse_Fragment();//建立GetPhoto Fragment
+	         creatFragment(getphotofragment);//顯示GetPhoto Fragment
+			// progressDialog_.dismiss();
+		}
+
+	}
 }
